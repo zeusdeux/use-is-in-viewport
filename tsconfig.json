@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "lib": ["es2018", "dom", "dom.iterable"],
+    "sourceMap": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "project": "./",
+    "outDir": "./built",
+
+    "strict": true,
+    "noEmitOnError": true,
+    "noErrorTruncation": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "built/**", "**/__tests__/*"]
+}
