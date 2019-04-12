@@ -71,7 +71,7 @@
   },
   "name": "@zeusdeux/use-intersection-observer",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "built/src/index.js",
   "types": "built/src/index.d.ts",
   "module": "built/src/index.js",
