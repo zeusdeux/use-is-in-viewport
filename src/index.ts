@@ -30,5 +30,5 @@ export default function useIntersectionObserver(
     [options]
   )
 
-  return [isInViewport, childRef, parentRef]
+  return [isInViewport, childRef]
 }
