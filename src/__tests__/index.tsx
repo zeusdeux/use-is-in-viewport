@@ -65,10 +65,19 @@ describe('useIntersectionObserver', () => {
 
     const { getByTestId } = render(<MyComponentWithChildren />)
 
-    const [el] = (observeElementInViewport as jest.Mock<
+    const [el, extractedInHandler] = (observeElementInViewport as jest.Mock<
       ReturnType<typeof observeElementInViewport>,
       ExtractArgTypes<typeof observeElementInViewport>
     >).mock.calls[0]
+
     expect(getByTestId('first-span')).toEqual(el)
+    act(() => extractedInHandler({} as CustomEntry, noop, {} as Element))
+
+    const [, , , options] = (observeElementInViewport as jest.Mock<
+      ReturnType<typeof observeElementInViewport>,
+      ExtractArgTypes<typeof observeElementInViewport>
+    >).mock.calls[2]
+    // TODO: test this for equality by passing a forwarding a ref into MyComponentWithChildren
+    expect(options!.viewport).not.toEqual(null)
   })
 })
