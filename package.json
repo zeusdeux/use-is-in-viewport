@@ -69,7 +69,7 @@
       "git add"
     ]
   },
-  "name": "useIntersectionObserver",
+  "name": "@zeusdeux/use-intersection-observer",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
   "version": "0.0.1",
   "main": "built/src/index.js",
@@ -86,10 +86,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeusdeux/useIntersectionObserver.git"
+    "url": "git+https://github.com/zeusdeux/use-intersection-observer.git"
   },
   "bugs": {
-    "url": "https://github.com/zeusdeux/useIntersectionObserver/issues"
+    "url": "https://github.com/zeusdeux/use-intersection-observer/issues"
   },
-  "homepage": "https://github.com/zeusdeux/useIntersectionObserver#readme"
+  "homepage": "https://github.com/zeusdeux/use-intersection-observer#readme"
 }
