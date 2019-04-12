@@ -5,7 +5,9 @@ type HookOptions = Partial<
   Pick<Options, Exclude<keyof Options, 'viewport'>> & { viewport: RefObject<HTMLElement | null> }
 >
 
-export default function useIntersectionObserver(options?: HookOptions) {
+export default function useIntersectionObserver(
+  options?: HookOptions
+): [boolean | null, (node: Element | null) => void] {
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)
   const unobserveFnRef = useRef(() => {}) // tslint:disable-line:no-empty
 
@@ -17,8 +19,8 @@ export default function useIntersectionObserver(options?: HookOptions) {
     options.viewport = { current: null }
   }
 
-  const childRef: any = useCallback(
-    (node: Element | null) => {
+  const childRef = useCallback(
+    (node: Element | null): void => {
       unobserveFnRef.current()
 
       if (node) {
