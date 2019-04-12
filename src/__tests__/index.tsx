@@ -15,7 +15,7 @@ describe('useIntersectionObserver', () => {
     ; (observeElementInViewport as jest.Mock).mockReset()
   })
 
-  it('should show a different message based on visibility in the viewport', () => {
+  it('should set viewport as null when no parent ref provided', () => {
     function MyComponent() {
       const [isInViewport, spanEl] = useIntersectionObserver()
 
@@ -27,11 +27,17 @@ describe('useIntersectionObserver', () => {
     }
 
     const { getByTestId } = render(<MyComponent />)
-    const [, extractedInHandler, extractedOutHandler] = (observeElementInViewport as jest.Mock<
+    const [
+      ,
+      extractedInHandler,
+      extractedOutHandler,
+      options
+    ] = (observeElementInViewport as jest.Mock<
       ReturnType<typeof observeElementInViewport>,
       ExtractArgTypes<typeof observeElementInViewport>
     >).mock.calls[0]
 
+    expect(options!.viewport).toBe(null)
     expect(getByTestId('my-span')).toHaveTextContent('Not in viewport')
     act(() => extractedInHandler({} as CustomEntry, noop, {} as Element))
     expect(getByTestId('my-span')).toHaveTextContent('In viewport')
