@@ -24,7 +24,7 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "observe-element-in-viewport": "0.0.7",
+    "observe-element-in-viewport": "0.0.8",
     "react": "^16.8.6"
   },
   "engines": {
@@ -71,7 +71,7 @@
   },
   "name": "@zeusdeux/use-intersection-observer",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "built/src/index.js",
   "types": "built/src/index.d.ts",
   "module": "built/src/index.js",
