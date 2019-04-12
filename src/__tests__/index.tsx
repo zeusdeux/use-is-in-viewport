@@ -11,6 +11,10 @@ type ExtractArgTypes<T> = T extends (...args: infer U) => any ? U : never
 describe('useIntersectionObserver', () => {
   const noop = () => { } // tslint:disable-line:no-empty
 
+  afterEach(() => {
+    ; (observeElementInViewport as jest.Mock).mockReset()
+  })
+
   it('should show a different message based on visibility in the viewport', () => {
     function MyComponent() {
       const [isInViewport, spanEl] = useIntersectionObserver()
@@ -35,14 +39,14 @@ describe('useIntersectionObserver', () => {
     expect(getByTestId('my-span')).toHaveTextContent('Not in viewport')
   })
 
-  it.only('should blah', () => {
+  it('should blah', () => {
     function MyComponentWithChildren() {
-      let nodex: Element | null = null
-      const [firstSpanIsInViewport, firstSpanEl] = useIntersectionObserver({ viewport: nodex })
-      const [secondSpanIsInViewport, secondSpanEl] = useIntersectionObserver({ viewport: nodex })
+      const parentRef = React.useRef(null)
+      const [firstSpanIsInViewport, firstSpanEl] = useIntersectionObserver(parentRef)
+      const [secondSpanIsInViewport, secondSpanEl] = useIntersectionObserver(parentRef)
 
       return (
-        <div data-testid="parent-div" ref={node => (nodex = node)}>
+        <div data-testid="parent-div" ref={parentRef}>
           <span data-testid="first-span" ref={firstSpanEl}>
             {firstSpanIsInViewport ? 'First span in viewport' : 'First span not in viewport'}
           </span>
@@ -55,11 +59,10 @@ describe('useIntersectionObserver', () => {
 
     const { getByTestId } = render(<MyComponentWithChildren />)
 
-    const [el, , , options] = (observeElementInViewport as jest.Mock<
+    const [el] = (observeElementInViewport as jest.Mock<
       ReturnType<typeof observeElementInViewport>,
       ExtractArgTypes<typeof observeElementInViewport>
     >).mock.calls[0]
-    console.log(options!.viewport)
     expect(getByTestId('first-span')).toEqual(el)
   })
 })

@@ -1,10 +1,13 @@
 import { observeElementInViewport, Options } from 'observe-element-in-viewport'
-import { useCallback, useState } from 'react'
+import { RefObject, useCallback, useState } from 'react'
 
-export default function useIntersectionObserver(options: Partial<Options> = {}) {
+export default function useIntersectionObserver(
+  parentRef: RefObject<any> = { current: null },
+  options: Partial<Pick<Options, Exclude<keyof Options, 'viewport'>>> = {}
+) {
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)
 
-  const ref: any = useCallback(
+  const childRef: any = useCallback(
     (node: Element | null) => {
       if (node) {
         observeElementInViewport(
@@ -17,12 +20,15 @@ export default function useIntersectionObserver(options: Partial<Options> = {}) 
             setIsInViewport(false)
             unobserveFn()
           },
-          options
+          {
+            ...options,
+            viewport: parentRef.current
+          }
         )
       }
     },
     [options]
   )
 
-  return [isInViewport, ref]
+  return [isInViewport, childRef, parentRef]
 }
