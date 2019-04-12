@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "rimraf built && npm run lint && tsc",
+    "prepare": "npm run build",
     "watch": "tsc --watch",
     "lint": "tslint -p ./tsconfig.json",
     "test": "jest",
@@ -69,10 +70,26 @@
     ]
   },
   "name": "useIntersectionObserver",
-  "description": "",
-  "version": "1.0.0",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
+  "version": "0.0.1",
+  "main": "built/src/index.js",
+  "types": "built/src/index.d.ts",
+  "module": "built/src/index.js",
+  "es": "built/src/index.js",
+  "main-es": "built/src/index.js",
+  "keywords": [
+    "react",
+    "hook",
+    "intersection observer"
+  ],
+  "author": "Mudit Ameta <zeusdeux@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeusdeux/useIntersectionObserver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zeusdeux/useIntersectionObserver/issues"
+  },
+  "homepage": "https://github.com/zeusdeux/useIntersectionObserver#readme"
 }
