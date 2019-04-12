@@ -1,1 +1,3 @@
-# My new project
+# useIntersectionObserver
+
+A react hook to use IntersectionObserver
