@@ -1,28 +1,34 @@
 import { observeElementInViewport, Options } from 'observe-element-in-viewport'
-import { RefObject, useCallback, useState } from 'react'
+import { RefObject, useCallback, useRef, useState } from 'react'
 
-export default function useIntersectionObserver(
-  parentRef: RefObject<any> = { current: null },
-  options: Partial<Pick<Options, Exclude<keyof Options, 'viewport'>>> = {}
-) {
+type HookOptions = Partial<
+  Pick<Options, Exclude<keyof Options, 'viewport'>> & { viewport: RefObject<HTMLElement | null> }
+>
+
+export default function useIntersectionObserver(options?: HookOptions) {
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)
+  const unobserveFnRef = useRef(() => {}) // tslint:disable-line:no-empty
+
+  if (!options) {
+    options = {}
+  }
+
+  if (!options.viewport) {
+    options.viewport = { current: null }
+  }
 
   const childRef: any = useCallback(
     (node: Element | null) => {
+      unobserveFnRef.current()
+
       if (node) {
-        observeElementInViewport(
+        unobserveFnRef.current = observeElementInViewport(
           node,
-          (_, unobserveFn) => {
-            unobserveFn()
-            setIsInViewport(true)
-          },
-          (_, unobserveFn) => {
-            unobserveFn()
-            setIsInViewport(false)
-          },
+          () => setIsInViewport(true),
+          () => setIsInViewport(false),
           {
             ...options,
-            viewport: parentRef.current
+            viewport: options!.viewport!.current
           }
         )
       }
