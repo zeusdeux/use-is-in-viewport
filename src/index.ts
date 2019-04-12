@@ -13,12 +13,12 @@ export default function useIntersectionObserver(
         observeElementInViewport(
           node,
           (_, unobserveFn) => {
-            setIsInViewport(true)
             unobserveFn()
+            setIsInViewport(true)
           },
           (_, unobserveFn) => {
-            setIsInViewport(false)
             unobserveFn()
+            setIsInViewport(false)
           },
           {
             ...options,
