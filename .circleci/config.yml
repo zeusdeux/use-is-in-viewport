@@ -6,6 +6,7 @@ jobs:
       - image: cypress/base:10
     environment:
       NODE_ENV: development
+      BLUEBIRD_DEBUG: 0
     steps:
       - checkout
       - run:
