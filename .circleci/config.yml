@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cypress/base:10
+    environment:
+      NODE_ENV: development
+    steps:
+      - checkout
+      - run: npm test
+      - store_artifacts:
+          path: ./cypress/screenshots
+      - store_artifacts:
+          path: ./cypress/videos
+
+workflows:
+  test-lib:
+    jobs:
+      - test
