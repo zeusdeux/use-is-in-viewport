@@ -6,7 +6,9 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "lint": "tslint -p ./tsconfig.json",
-    "test": "jest",
+    "build-cra": "cd examples/cra/ && pwd && npm run build",
+    "start-cra": "cd examples/cra/ && pwd && npm run start-for-cypress",
+    "test": "npm run build:esm && npm run build-cra && npm run start-cra && echo \"Starting cypress...\" && cypress run",
     "prettier": "prettier --config ./.prettierrc --write \"{src,test,bin,lib,config}/**/*.{ts,json,css,html,md}\""
   },
   "devDependencies": {

@@ -1,0 +1,35 @@
+{
+  "name": "use-intersection-observer-example",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "emotion": "10.0.9",
+    "intersection-observer": "0.5.1",
+    "prettier": "^1.17.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-scripts": "2.1.8"
+  },
+  "devDependencies": {
+    "serve": "^11.0.0",
+    "typescript": "3.3.3",
+    "wait-on": "^3.2.0"
+  },
+  "scripts": {
+    "copy-hook": "cp ../../built/es9-esm/src/index.js src/use-intersection-observer.js",
+    "kill-old-server": "pkill -f \"serve -l 3000 ./build\" || :",
+    "start-for-cypress": "npm run kill-old-server && serve -l 3000 ./build & ./node_modules/.bin/wait-on http://localhost:3000",
+    "start": "npm run copy-hook && react-scripts start",
+    "build": "npm run copy-hook && react-scripts build",
+    "test": "npm run copy-hook && react-scripts test --env=jsdom",
+    "eject": "npm run copy-hook && react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
