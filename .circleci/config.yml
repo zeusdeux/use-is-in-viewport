@@ -8,6 +8,7 @@ jobs:
       NODE_ENV: development
     steps:
       - checkout
+      - run: npm install
       - run: npm test
       - store_artifacts:
           path: ./cypress/screenshots
