@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["es2018", "dom", "dom.iterable"],
+    "sourceMap": true,
+    "jsx": "react",
+    "project": "./",
+
+    "strict": true,
+    "noEmitOnError": true,
+    "noErrorTruncation": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "built/**"]
+}

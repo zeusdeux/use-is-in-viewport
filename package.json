@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "build": "rimraf built && npm run lint && tsc",
+    "build": "npm run lint && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p ./tsconfig.es5.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.es9.esm.json",
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "lint": "tslint -p ./tsconfig.json",
@@ -49,12 +51,12 @@
   },
   "name": "@zeusdeux/use-intersection-observer",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
-  "version": "0.0.6",
-  "main": "built/src/index.js",
-  "types": "built/src/index.d.ts",
-  "module": "built/src/index.js",
-  "es": "built/src/index.js",
-  "main-es": "built/src/index.js",
+  "version": "0.0.7",
+  "main": "built/es5-cjs/src/index.js",
+  "types": "built/es5-cjs/src/index.d.ts",
+  "module": "built/es9-esm/src/index.js",
+  "es": "built/es9-esm/src/index.js",
+  "main-es": "built/es9-esm/src/index.js",
   "keywords": [
     "react",
     "hook",
