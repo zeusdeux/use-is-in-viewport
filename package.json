@@ -10,15 +10,11 @@
     "prettier": "prettier --config ./.prettierrc --write \"{src,test,bin,lib,config}/**/*.{ts,json,css,html,md}\""
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
     "@types/react": "^16.8.13",
     "cypress": "^3.2.0",
-    "cypress-react-unit-test": "^2.4.1",
-    "emotion": "^10.0.9",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
     "prettier": "1.16.4",
-    "rimraf": "^2.6.3",
     "tslint": "^5.15.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3"
