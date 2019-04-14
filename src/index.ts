@@ -19,7 +19,7 @@ export default function useIntersectionObserver(
     options.viewport = { current: null }
   }
 
-  const childRef = useCallback(
+  const childCallbackRef = useCallback(
     (node: Element | null): void => {
       unobserveFnRef.current()
 
@@ -38,5 +38,5 @@ export default function useIntersectionObserver(
     [options]
   )
 
-  return [isInViewport, childRef]
+  return [isInViewport, childCallbackRef]
 }
