@@ -8,7 +8,14 @@ jobs:
       NODE_ENV: development
     steps:
       - checkout
-      - run: npm install
+      - run:
+          name: "Install lib dependencies"
+          command: npm install
+      - run:
+          name: "Install CRA example dependencies"
+          command: |
+            cd examples/cra/
+            npm ci
       - run: npm test
       - store_artifacts:
           path: ./cypress/screenshots
