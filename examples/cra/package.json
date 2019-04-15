@@ -19,7 +19,7 @@
   },
   "scripts": {
     "copy-hook": "cp ../../built/es9-esm/src/index.js src/use-intersection-observer.js",
-    "kill-old-server": "pkill -f \"serve -l 3000 ./build\" || :",
+    "kill-old-server": "pkill -f \"serve -n -l 3000 ./build\" || :",
     "start-for-cypress": "npm run kill-old-server && ./node_modules/.bin/serve -n -l 3000 ./build & ./node_modules/.bin/wait-on http://localhost:3000",
     "start": "npm run copy-hook && react-scripts start",
     "build": "npm run copy-hook && react-scripts build",
