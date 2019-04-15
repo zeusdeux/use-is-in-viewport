@@ -1,23 +1,20 @@
 import { observeElementInViewport } from 'observe-element-in-viewport';
-import { useCallback, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 export default function useIntersectionObserver(options) {
     const [isInViewport, setIsInViewport] = useState(null);
-    const unobserveFnRef = useRef(() => { }); // tslint:disable-line:no-empty
-    if (!options) {
-        options = {};
+    let { target, viewport, ...restOpts } = options; // tslint:disable-line:prefer-const
+    if (!target || typeof target !== 'object' || !('current' in target)) {
+        throw new Error(`Expected target to be a ref but received ${target}`);
     }
-    if (!options.viewport) {
-        options.viewport = { current: null };
+    if (!viewport) {
+        viewport = { current: null };
     }
-    const childCallbackRef = useCallback((node) => {
-        unobserveFnRef.current();
-        if (node) {
-            unobserveFnRef.current = observeElementInViewport(node, () => setIsInViewport(true), () => setIsInViewport(false), {
-                ...options,
-                viewport: options.viewport.current
-            });
-        }
-    }, [options]);
-    return [isInViewport, childCallbackRef];
+    useEffect(() => {
+        return observeElementInViewport(target.current, () => setIsInViewport(true), () => setIsInViewport(false), {
+            ...restOpts,
+            viewport: viewport.current
+        });
+    });
+    return isInViewport;
 }
 //# sourceMappingURL=index.js.map

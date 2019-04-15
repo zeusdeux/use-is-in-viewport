@@ -55,11 +55,16 @@ const button = css`
 
 function App() {
   const parentRef = React.useRef(null)
-  const [isInViewport1, boxEl1] = useIntersectionObserver({
-    viewport: parentRef
+  const boxEl1 = React.useRef(null)
+  const boxEl2 = React.useRef(null)
+
+  const isInViewport1 = useIntersectionObserver({
+    viewport: parentRef,
+    target: boxEl1
   })
-  const [isInViewport2, boxEl2] = useIntersectionObserver({
-    threshold: [50]
+  const isInViewport2 = useIntersectionObserver({
+    threshold: [50],
+    target: boxEl2
   })
   const [isLarge, toggleContainerSize] = React.useState(false)
 
