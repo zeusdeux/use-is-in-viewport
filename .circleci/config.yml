@@ -3,22 +3,22 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: image: circleci/node:dubnium
+      - image: circleci/node:dubnium
     environment:
       NODE_ENV: development
       BLUEBIRD_DEBUG: 0
     steps:
       - checkout
       - run:
-          name: "Install lib dependencies"
+          name: 'Install lib dependencies'
           command: npm install
       - run:
-          name: "Install CRA example dependencies"
+          name: 'Install CRA example dependencies'
           command: |
             cd examples/cra/
             npm ci
       - run:
-          name: "Run tests"
+          name: 'Run tests'
           command: npm run test-ci
       - store_artifacts:
           path: ./cypress/screenshots

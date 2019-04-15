@@ -48,6 +48,11 @@
     "*.{json,md,html,css}": [
       "prettier --write",
       "git add"
+    ],
+    ".circleci/config.yml": [
+      "prettier --write",
+      "circleci config validate",
+      "git add"
     ]
   },
   "name": "@zeusdeux/use-intersection-observer",
