@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cypress/base:10
+      - image: image: circleci/node:dubnium
     environment:
       NODE_ENV: development
       BLUEBIRD_DEBUG: 0
