@@ -1,7 +1,7 @@
 import { observeElementInViewport, Options } from 'observe-element-in-viewport'
 import { RefObject, useCallback, useRef, useState } from 'react'
 
-type HookOptions = Partial<
+export type HookOptions = Partial<
   Pick<Options, Exclude<keyof Options, 'viewport'>> & { viewport: RefObject<HTMLElement | null> }
 >
 
