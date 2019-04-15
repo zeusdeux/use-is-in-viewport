@@ -10,7 +10,8 @@
     "cra:start": "cd examples/cra/ && pwd && npm run start-for-cypress",
     "cra:stop": "cd examples/cra/ && pwd && npm run kill-old-server",
     "cypress:run": "echo \"Starting cypress...\" && cypress run",
-    "test": "npm run build:esm && npm run cra:build && npm run cra:start && npm run cypress:run",
+    "test": "npm run build:esm && npm run cra:stop && npm run cra:build && npm run cra:start && npm run cypress:run && npm run cra:stop",
+    "test-ci": "npm run build:esm && npm run cra:build && npm run cra:start && npm run cypress:run",
     "prettier": "prettier --config ./.prettierrc --write \"{src,test,bin,lib,config}/**/*.{ts,json,css,html,md}\""
   },
   "devDependencies": {

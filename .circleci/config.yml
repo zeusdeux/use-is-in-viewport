@@ -17,7 +17,9 @@ jobs:
           command: |
             cd examples/cra/
             npm ci
-      - run: npm test
+      - run:
+          name: "Run tests"
+          command: npm run test-ci
       - store_artifacts:
           path: ./cypress/screenshots
       - store_artifacts:
