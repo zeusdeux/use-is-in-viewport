@@ -1,11 +1,9 @@
 import { observeElementInViewport } from 'observe-element-in-viewport';
-import { useEffect, useState } from 'react';
-export default function useIntersectionObserver(options) {
+import { useEffect, useRef, useState } from 'react';
+export default function useIntersectionObserver(options = {}) {
+    const target = useRef(null);
     const [isInViewport, setIsInViewport] = useState(null);
-    let { target, viewport, ...restOpts } = options; // tslint:disable-line:prefer-const
-    if (!target || typeof target !== 'object' || !('current' in target)) {
-        throw new Error(`Expected target to be a ref but received ${target}`);
-    }
+    let { viewport, ...restOpts } = options; // tslint:disable-line:prefer-const
     if (!viewport) {
         viewport = { current: null };
     }
@@ -15,6 +13,6 @@ export default function useIntersectionObserver(options) {
             viewport: viewport.current
         });
     });
-    return isInViewport;
+    return [isInViewport, target];
 }
 //# sourceMappingURL=index.js.map

@@ -1,19 +1,18 @@
 import { observeElementInViewport, Options } from 'observe-element-in-viewport'
-import { RefObject, useEffect, useState } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 
 export type HookOptions = Partial<
   Pick<Options, Exclude<keyof Options, 'viewport'>> & {
     viewport: RefObject<HTMLElement | null>
   }
-> & { target: RefObject<HTMLElement | null> }
+>
 
-export default function useIntersectionObserver(options: HookOptions): boolean | null {
+export default function useIntersectionObserver(
+  options: HookOptions = {}
+): [boolean | null, RefObject<HTMLElement | null>] {
+  const target = useRef(null)
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)
-  let { target, viewport, ...restOpts } = options // tslint:disable-line:prefer-const
-
-  if (!target || typeof target !== 'object' || !('current' in target)) {
-    throw new Error(`Expected target to be a ref but received ${target}`)
-  }
+  let { viewport, ...restOpts } = options // tslint:disable-line:prefer-const
 
   if (!viewport) {
     viewport = { current: null }
@@ -31,5 +30,5 @@ export default function useIntersectionObserver(options: HookOptions): boolean |
     )
   })
 
-  return isInViewport
+  return [isInViewport, target]
 }

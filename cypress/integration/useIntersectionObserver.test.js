@@ -25,7 +25,6 @@ describe('useIntersectionObserver', () => {
       .should('contain', 'Visible')
 
     cy.scrollTo(0, 0)
-
     cy.get('[data-testid="div-viewport-window"]').should('contain', 'Hidden')
   })
 })
