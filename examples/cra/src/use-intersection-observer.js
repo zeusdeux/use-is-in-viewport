@@ -1,18 +1,42 @@
 import { observeElementInViewport } from 'observe-element-in-viewport';
-import { useEffect, useRef, useState } from 'react';
-export default function useIntersectionObserver(options = {}) {
-    const target = useRef(null);
+import { useCallback, useEffect, useRef, useState } from 'react';
+export default function useIntersectionObserver(options) {
     const [isInViewport, setIsInViewport] = useState(null);
-    let { viewport, ...restOpts } = options; // tslint:disable-line:prefer-const
-    if (!viewport) {
-        viewport = { current: null };
-    }
+    const { target, viewport, ...restOpts } = options;
+    const parentRef = useRef(null);
+    const childRef = useRef(null);
+    const parentCbRef = useCallback(node => {
+        parentRef.current = node;
+        if (viewport) {
+            if (isCallbackRef(viewport)) {
+                viewport(node);
+            }
+            else if (isRefObject(viewport)) {
+                viewport.current = node;
+            }
+        }
+    }, [parentRef, viewport]);
+    const childCbRef = useCallback(node => {
+        childRef.current = node;
+        if (isCallbackRef(target)) {
+            target(node);
+        }
+        else if (isRefObject(target)) {
+            target.current = node;
+        }
+    }, [childRef, target]);
     useEffect(() => {
-        return observeElementInViewport(target.current, () => setIsInViewport(true), () => setIsInViewport(false), {
+        return observeElementInViewport(childRef.current, () => setIsInViewport(true), () => setIsInViewport(false), {
             ...restOpts,
-            viewport: viewport.current
+            viewport: parentRef.current
         });
-    });
-    return [isInViewport, target];
+    }, [childRef, restOpts, parentRef]);
+    return [isInViewport, childCbRef, parentCbRef];
+}
+function isRefObject(x) {
+    return typeof x === 'object' && 'current' in x;
+}
+function isCallbackRef(f) {
+    return typeof f === 'function' && typeof f.call === 'function';
 }
 //# sourceMappingURL=index.js.map

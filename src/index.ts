@@ -1,34 +1,66 @@
 import { observeElementInViewport, Options } from 'observe-element-in-viewport'
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
 
+export type CallbackRef = (node: HTMLElement | null) => any
 export type HookOptions = Partial<
   Pick<Options, Exclude<keyof Options, 'viewport'>> & {
-    viewport: RefObject<HTMLElement | null>
+    viewport: CallbackRef | MutableRefObject<HTMLElement | null>
   }
->
+> & { target: CallbackRef | MutableRefObject<HTMLElement | null> }
 
 export default function useIntersectionObserver(
-  options: HookOptions = {}
-): [boolean | null, RefObject<HTMLElement | null>] {
-  const target = useRef(null)
+  options: HookOptions
+): [boolean | null, CallbackRef, CallbackRef] {
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)
-  let { viewport, ...restOpts } = options // tslint:disable-line:prefer-const
+  const { target, viewport, ...restOpts } = options
+  const parentRef: MutableRefObject<HTMLElement | null> = useRef(null)
+  const childRef: MutableRefObject<HTMLElement | null> = useRef(null)
 
-  if (!viewport) {
-    viewport = { current: null }
-  }
+  const parentCbRef: CallbackRef = useCallback(
+    node => {
+      parentRef.current = node
+      if (viewport) {
+        if (isCallbackRef(viewport)) {
+          viewport(node)
+        } else if (isRefObject(viewport)) {
+          viewport.current = node
+        }
+      }
+    },
+    [parentRef, viewport]
+  )
+
+  const childCbRef: CallbackRef = useCallback(
+    node => {
+      childRef.current = node
+      if (isCallbackRef(target)) {
+        target(node)
+      } else if (isRefObject(target)) {
+        target.current = node
+      }
+    },
+    [childRef, target]
+  )
 
   useEffect(() => {
     return observeElementInViewport(
-      target.current,
+      childRef.current,
       () => setIsInViewport(true),
       () => setIsInViewport(false),
       {
         ...restOpts,
-        viewport: viewport!.current
+        viewport: parentRef.current
       }
     )
-  })
+  }, [childRef, restOpts, parentRef])
 
-  return [isInViewport, target]
+  return [isInViewport, childCbRef, parentCbRef]
+}
+
+function isRefObject(x: any): boolean {
+  return typeof x === 'object' && 'current' in x
+}
+
+function isCallbackRef(f: any): f is CallbackRef {
+  return typeof f === 'function' && typeof f.call === 'function'
 }

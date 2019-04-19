@@ -55,7 +55,8 @@ const button = css`
 
 function App() {
   const parentRef = React.useRef(null)
-  const [isInViewport1, boxEl1] = useIntersectionObserver({
+
+  const [isInViewport1, boxEl1, parentCbRef] = useIntersectionObserver({
     viewport: parentRef
   })
   const [isInViewport2, boxEl2] = useIntersectionObserver({
@@ -76,7 +77,7 @@ function App() {
         className={cx(container, {
           [growContainer]: isLarge
         })}
-        ref={parentRef}
+        ref={parentCbRef}
       >
         <div
           className={cx(box, box1, {
