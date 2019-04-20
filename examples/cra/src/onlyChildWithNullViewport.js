@@ -24,6 +24,7 @@ export default function OnlyChildWithNullViewport() {
           [visible]: isInViewport
         })}
         data-testid="box"
+        ref={childElToWatch}
       >
         <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
       </div>
