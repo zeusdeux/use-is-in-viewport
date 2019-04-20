@@ -21,7 +21,29 @@ causes an issue in your application.
 
 ## Usage
 
-[![Edit use-intersection-observer example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/54r7k92m04?fontsize=14)
+### Example 1: Element with its parent document as viewport
+
+As soon as at least 1px of the child element is visible in the parent document viewport,
+`isInViewport` evaluates to true.
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import useIsInViewport from '@zeusdeux/use-is-in-viewport
+
+export default function OnlyChildWithNullViewport() {
+  const [isInViewport, childElToWatch] = useIsInViewport()
+
+  return (
+      <div ref={childElToWatch}>
+        <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
+      </div>
+  )
+}
+
+```
+
+More example coming soon...
 
 ## Tasks
 
