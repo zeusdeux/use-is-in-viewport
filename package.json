@@ -55,9 +55,9 @@
       "git add"
     ]
   },
-  "name": "@zeusdeux/use-intersection-observer",
+  "name": "@zeusdeux/use-is-in-viewport",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
-  "version": "0.0.7",
+  "version": "0.0.1",
   "main": "built/es5-cjs/src/index.js",
   "types": "built/es5-cjs/src/index.d.ts",
   "module": "built/es9-esm/src/index.js",
@@ -70,12 +70,15 @@
   ],
   "author": "Mudit Ameta <zeusdeux@gmail.com>",
   "license": "MIT",
+  "directories": {
+    "example": "examples"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeusdeux/use-intersection-observer.git"
+    "url": "git+https://github.com/zeusdeux/use-is-in-viewport.git"
   },
   "bugs": {
-    "url": "https://github.com/zeusdeux/use-intersection-observer/issues"
+    "url": "https://github.com/zeusdeux/use-is-in-viewport/issues"
   },
-  "homepage": "https://github.com/zeusdeux/use-intersection-observer#readme"
+  "homepage": "https://github.com/zeusdeux/use-is-in-viewport#readme"
 }

@@ -1,22 +1,23 @@
-# use-intersection-observer
+# use-is-in-viewport
 
-[![CircleCI](https://circleci.com/gh/zeusdeux/use-intersection-observer.svg?style=svg)](https://circleci.com/gh/zeusdeux/use-intersection-observer)
+[![CircleCI](https://circleci.com/gh/zeusdeux/use-is-in-viewport.svg?style=svg)](https://circleci.com/gh/zeusdeux/use-is-in-viewport)
 
 A react hook to use the
 [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
-declaratively in your React app.
+declaratively in your React app for the purposes of finding out if an element is in a given
+viewport.
 
 ## Installation
 
-`npm install @zeusdeux/use-intersection-observer`
+`npm install @zeusdeux/use-is-in-viewport`
 
 This hook declares `react` and `react-dom` as _peer dependencies_. While it does not depend on
 `react-dom` itself, hooks can misbehave if the renderer and react version don't match up. Given that
 the `IntersectionObserver` is a web platform api, `react-dom` was added as a the renderer peer
 dependency.
 
-Please [open as issue](https://github.com/zeusdeux/use-intersection-observer/issues/new) if this
-default causes an issue in your application.
+Please [open as issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if this default
+causes an issue in your application.
 
 ## Usage
 
@@ -31,10 +32,10 @@ There are two distinct scenarios that this hook is designed to handle.
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import useIntersectionObserver from '@zeusdeux/use-intersection-observer'
+import useIsInViewport from '@zeusdeux/use-is-in-viewport'
 
 function App() {
-  const [isInViewport, targetRef] = useIntersectionObserver({
+  const [isInViewport, targetRef] = useIsInViewport({
     threshold: 50
   })
 

@@ -1,6 +1,6 @@
 import { observeElementInViewport } from 'observe-element-in-viewport';
 import { useCallback, useEffect, useRef, useState } from 'react';
-export default function useIntersectionObserver(options) {
+export default function useIsInViewport(options) {
     const [isInViewport, setIsInViewport] = useState(null);
     const { target, viewport, ...restOpts } = options;
     const parentRef = useRef(null);

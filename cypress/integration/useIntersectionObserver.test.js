@@ -1,4 +1,4 @@
-describe('useIntersectionObserver', () => {
+describe('useIsInViewport', () => {
   beforeEach(() => {
     cy.visit('/')
     cy.scrollTo(0, 0)

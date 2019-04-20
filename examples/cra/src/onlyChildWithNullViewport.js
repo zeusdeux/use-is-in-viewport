@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { cx } from 'emotion'
-import useIntersectionObserver from './use-intersection-observer'
+import useIsInViewport from './use-is-in-viewport'
 import { box, button, inWindowViewport, outsideWindowViewport, visible } from './styles'
 
 export default function OnlyChildWithNullViewport() {
-  const [isInViewport, childElToWatch] = useIntersectionObserver()
+  const [isInViewport, childElToWatch] = useIsInViewport()
   const [hide, toggleHide] = React.useState(false)
 
   return (

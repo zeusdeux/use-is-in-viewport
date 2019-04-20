@@ -1,7 +1,7 @@
 import { cx } from 'emotion'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import useIntersectionObserver from './use-intersection-observer'
+import useIsInViewport from './use-is-in-viewport'
 import {
   container,
   growContainer,
@@ -16,10 +16,10 @@ import {
 function App() {
   const parentRef = React.useRef(null)
 
-  const [isInViewport1, boxEl1, parentCbRef] = useIntersectionObserver({
+  const [isInViewport1, boxEl1, parentCbRef] = useIsInViewport({
     viewport: parentRef
   })
-  const [isInViewport2, boxEl2] = useIntersectionObserver({
+  const [isInViewport2, boxEl2] = useIsInViewport({
     threshold: [50]
   })
   const [isLarge, toggleContainerSize] = React.useState(false)

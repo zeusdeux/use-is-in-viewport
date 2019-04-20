@@ -9,7 +9,7 @@ export type HookOptions = Partial<
   }
 >
 
-export default function useIntersectionObserver(
+export default function useIsInViewport(
   options: HookOptions
 ): [boolean | null, CallbackRef, CallbackRef] {
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)

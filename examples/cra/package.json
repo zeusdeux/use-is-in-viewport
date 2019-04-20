@@ -18,7 +18,7 @@
     "wait-on": "^3.2.0"
   },
   "scripts": {
-    "copy-hook": "cp ../../built/es9-esm/src/index.js src/use-intersection-observer.js",
+    "copy-hook": "cp ../../built/es9-esm/src/index.js src/use-is-in-viewport.js",
     "kill-old-server": "pkill -f \"serve -n -l 3000 ./build\" || :",
     "start-for-cypress": "./node_modules/.bin/serve -n -l 3000 ./build & ./node_modules/.bin/wait-on http://localhost:3000",
     "start": "npm run copy-hook && react-scripts start",
