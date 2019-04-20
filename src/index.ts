@@ -5,8 +5,9 @@ export type CallbackRef = (node: HTMLElement | null) => any
 export type HookOptions = Partial<
   Pick<Options, Exclude<keyof Options, 'viewport'>> & {
     viewport: CallbackRef | MutableRefObject<HTMLElement | null>
+    target: CallbackRef | MutableRefObject<HTMLElement | null>
   }
-> & { target: CallbackRef | MutableRefObject<HTMLElement | null> }
+>
 
 export default function useIntersectionObserver(
   options: HookOptions
@@ -33,10 +34,12 @@ export default function useIntersectionObserver(
   const childCbRef: CallbackRef = useCallback(
     node => {
       childRef.current = node
-      if (isCallbackRef(target)) {
-        target(node)
-      } else if (isRefObject(target)) {
-        target.current = node
+      if (target) {
+        if (isCallbackRef(target)) {
+          target(node)
+        } else if (isRefObject(target)) {
+          target.current = node
+        }
       }
     },
     [childRef, target]

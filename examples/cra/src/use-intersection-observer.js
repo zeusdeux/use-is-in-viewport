@@ -18,11 +18,13 @@ export default function useIntersectionObserver(options) {
     }, [parentRef, viewport]);
     const childCbRef = useCallback(node => {
         childRef.current = node;
-        if (isCallbackRef(target)) {
-            target(node);
-        }
-        else if (isRefObject(target)) {
-            target.current = node;
+        if (target) {
+            if (isCallbackRef(target)) {
+                target(node);
+            }
+            else if (isRefObject(target)) {
+                target.current = node;
+            }
         }
     }, [childRef, target]);
     useEffect(() => {
