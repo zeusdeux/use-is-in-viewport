@@ -21,35 +21,7 @@ causes an issue in your application.
 
 ## Usage
 
-There are two distinct scenarios that this hook is designed to handle.
-
-1. An element wants to know its own visibility in relation to a container
-2. A parent cotainer wants to know when its children intersect with itself or some other node higher
-   in the hierarchy
-
-### Scenario 1: An element wants to know its own visibility
-
-```jsx
-import React from 'react'
-import ReactDOM from 'react-dom'
-import useIsInViewport from '@zeusdeux/use-is-in-viewport'
-
-function App() {
-  const [isInViewport, targetRef] = useIsInViewport({
-    threshold: 50
-  })
-
-  return (
-    <div ref={targetRef}>
-      <p>{isInViewport ? 'Visible' : 'Not visible'}</p>
-    </div>
-  )
-}
-```
-
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vyr0xw5o70?fontsize=14)
-
-[Working example in a codesandbox](https://codesandbox.io/s/54r7k92m04?fontsize=14).
+[![Edit use-intersection-observer example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/54r7k92m04?fontsize=14)
 
 ## Tasks
 
