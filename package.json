@@ -28,8 +28,7 @@
     "observe-element-in-viewport": "0.0.11"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.8.6"
   },
   "engines": {
     "node": ">=10"

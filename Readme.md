@@ -11,10 +11,8 @@ viewport.
 
 `npm install use-is-in-viewport`
 
-This hook declares `react` and `react-dom` as _peer dependencies_. While it does not depend on
-`react-dom` itself, hooks can misbehave if the renderer and react version don't match up. Given that
-the `IntersectionObserver` is a web platform api, `react-dom` was added as a the renderer peer
-dependency.
+Please note that this hook declares `react` and as _peer dependency_. Therefore, you must have
+`react` installed to use this package.
 
 Please [open as issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if this default
 causes an issue in your application.
