@@ -55,7 +55,7 @@
       "git add"
     ]
   },
-  "name": "@zeusdeux/use-is-in-viewport",
+  "name": "use-is-in-viewport",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
   "version": "0.0.1",
   "main": "built/es5-cjs/src/index.js",
@@ -66,7 +66,8 @@
   "keywords": [
     "react",
     "hook",
-    "intersection observer"
+    "intersection observer",
+    "viewport"
   ],
   "author": "Mudit Ameta <zeusdeux@gmail.com>",
   "license": "MIT",

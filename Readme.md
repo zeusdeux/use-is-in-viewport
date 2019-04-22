@@ -9,7 +9,7 @@ viewport.
 
 ## Installation
 
-`npm install @zeusdeux/use-is-in-viewport`
+`npm install use-is-in-viewport`
 
 This hook declares `react` and `react-dom` as _peer dependencies_. While it does not depend on
 `react-dom` itself, hooks can misbehave if the renderer and react version don't match up. Given that
@@ -29,7 +29,7 @@ As soon as at least 1px of the child element is visible in the parent document v
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import useIsInViewport from '@zeusdeux/use-is-in-viewport
+import useIsInViewport from 'use-is-in-viewport
 
 export default function OnlyChildWithNullViewport() {
   const [isInViewport, childElToWatch] = useIsInViewport()
