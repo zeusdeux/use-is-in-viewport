@@ -12,7 +12,7 @@ import {
   altVisible,
   button
 } from './styles'
-import { RefForwardingElement } from './viewportParentDocument'
+// import { RefForwardingElement } from './viewportParentDocument'
 
 function App() {
   const parentRef = React.useRef(null)
@@ -63,21 +63,21 @@ function App() {
   )
 }
 
-function App2() {
-  const forwardRef = React.useCallback(node => {
-    console.log('node ->', node)
-  })
-  const [showElement, toggleElement] = React.useState(true)
+// function App2() {
+//   const forwardRef = React.useCallback(node => {
+//     console.log('node ->', node)
+//   })
+//   const [showElement, toggleElement] = React.useState(true)
 
-  return (
-    <>
-      <button onClick={_ => toggleElement(v => !v)}>
-        {showElement ? 'Hide Element' : 'Show Element'}
-      </button>
-      {showElement ? <RefForwardingElement ref={forwardRef} threshold={75} /> : null}
-    </>
-  )
-}
+//   return (
+//     <>
+//       <button onClick={_ => toggleElement(v => !v)}>
+//         {showElement ? 'Hide Element' : 'Show Element'}
+//       </button>
+//       {showElement ? <RefForwardingElement ref={forwardRef} threshold={75} /> : null}
+//     </>
+//   )
+// }
 
 async function run() {
   if (!window.IntersectionObserver) {
