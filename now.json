@@ -1,0 +1,15 @@
+{
+  "name": "useIsInViewport",
+  "version": 2,
+  "alias": ["useIsInViewport.zdx.cat"],
+  "routes": [
+    {
+      "src": ".*",
+      "methods": ["GET"],
+      "status": 302,
+      "headers": {
+        "Location": "https://codesandbox.io/s/54r7k92m04"
+      }
+    }
+  ]
+}
