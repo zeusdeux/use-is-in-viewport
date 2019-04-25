@@ -7,12 +7,26 @@ A react hook to use the
 declaratively in your React app for the purposes of finding out if an element is in a given
 viewport.
 
+- [Motivation](#motivation)
+- [Guiding principles](#guiding-principles)
+- [Installation](#installation)
+- [API docs](#api)
+  - [Return value](#return-value)
+  - [Input options](#options)
+    - [options.threshold](#options.threshold)
+    - [options.target](#options.target)
+    - [options.viewport](#options.viewport)
+    - [options.{modTop, modRight, modBottom, modLeft}](#optionsmodtop-modright-modbottom-modleft)
+- [Example usage](#example-usage)
+- [Tasks](#tasks)
+
 ## Motivation
 
 I wrote [isInViewport](https://github.com/zeusdeux/isInViewport) for the jQuery world back in the
 day and while how we build interfaces has changed massively since, the problem
-[isInViewport](https://github.com/zeusdeux/isInViewport) solved still remains. What did change was
-that the web platform gave us better primitives to solve this problem in the shape of the
+[isInViewport](https://github.com/zeusdeux/isInViewport) solves still remains. Since then, the web
+platform has grown massively and now gives us better primitives to solve this problem in the shape
+of the
 [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 
 I was looking for a simple way to use the
@@ -39,10 +53,10 @@ this hook.
    - Easy installation
    - Correct peer dependencies to prevent foot-guns
    - Tons of docs and examples (in progress)
-3. Make it easy to solve the most likely use cases
+3. Make it easy to address the most likely use-cases
    - e.g., "Tell me when an element is visible in the current window viewport", "Tell me when 75% of
      an element is visible in current window viewport"
-4. Make it possible to solve other problems without unnecessary noise
+4. Make it possible to address other use-cases without unnecessary noise
    - e.g., "Tell me when an element is visible in my custom viewport", "Let me customize the
      viewport I want to pass down", "Let me use this with a component that uses React.forwardRef",
      etc
@@ -64,8 +78,8 @@ this hook.
 Please note that this hook declares `react` and as _peer dependency_. Therefore, you must have
 `react` installed to use this package.
 
-Please [open as issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if this default
-causes an issue in your application.
+Please [open an issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if this default
+causes a problem in your application.
 
 ## API
 
@@ -74,10 +88,12 @@ causes an issue in your application.
 > The nomenclature (target, viewport, threshold, etc) are borrowed from that of the
 > [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_concepts_and_usage)
 
-The hook accepts an optional `options` object. When not provided, sane defaults are used. They are
-described in the `options` section below.
+- [Return value](#return-value)
+- [Input options](#options)
 
-It returns an array that contains the following in order:
+#### Return value
+
+It returns an `array` that contains the following in order:
 
 1. a flag that is one of `null`, `true`, `false` based on the visibility of target element in
    provided viewport
@@ -91,10 +107,10 @@ It returns an array that contains the following in order:
 
 #### Options
 
-All options are optional. Please (ab)use your editor's Typescript capabilities to capitalize on
-types for this hook.
+The hook accepts an optional `options` object. When not provided, "sane" defaults are used. They are
+described in the `options` section below.
 
-##### options.threshold
+#### _options.threshold_
 
 The threshold describes what **percent** of the target element should intersect with the given
 viewport for it to be considered as visible in the viewport.
@@ -106,23 +122,124 @@ Passing an array of numbers is likely to be useless for most use cases. It only 
 artefact of the library this hook is built on and hence will most likely will be deprecated and
 removed based on feedback from the community.
 
-example: `useIsInViewport({ threshold: 50 })` would report an element as visible in its parent
-document viewport when at least 50% of the target intersects with the viewport.
+**Default**: `0%` -> as soon as even `1px` of your target element is visible in viewport it'll be
+reported as visible in viewport.
 
-##### options.target
+**Example**:
+
+```jsx
+// this would report an element as visible in its parent document viewport when
+// at least 50% of the target intersects with the viewport
+const [isInViewport, targetRef] = useIsInViewport({ threshold: 50 })
+...
+<div ref={wrappedTargetRef}>{ isInViewport ? 'Visible' : 'Nope' }</div>
+```
+
+#### _options.target_
 
 The target accepts a [ref](https://reactjs.org/docs/refs-and-the-dom.html) for the element you want
-track the visibility in viewport of. This ref is wrapped and a new ref is returned at index 1 in the
-returned array.
+track the visibility of in a viewport. This is useful when you have a `ref` that is created outside
+of this hook (for e.g., passed in via `ref` prop from another component, a forwarded ref, etc).
 
-example: `useIsInViewport({ target: node => console.log(node) })` or
-`useIsInViewport({ target: useRef(null) })`
+This ref is wrapped and a new ref is returned at index 1 in the returned array. The returned ref is
+what you must pass to the `ref` property of the element you want to track the visibility of.
 
-##### options.viewport
+**Default**: `undefined`
 
-##### options.{modTop, modRight, modBottom, modLeft}
+**Example**:
 
-## Usage
+```jsx
+const targetRef = useCallback(node => console.log(node)) // can come from anywhere
+// or
+const targetRef = useRef(null) // can come from anywhere
+
+const [isInViewport, wrappedTargetRef] = useIsInViewport({ target: targetRef })
+...
+<div ref={wrappedTargetRef}>{ isInViewport ? 'Visible' : 'Nope' }</div>
+```
+
+#### _options.viewport_
+
+The viewport accepts a [ref](https://reactjs.org/docs/refs-and-the-dom.html) for the element you
+want to use as the viewport. This _must_ be a parent of the element you want to track the visibility
+of. This options is useful when you have a `ref` that is created outside of this hook (for e.g.,
+passed in via `ref` prop from another component, a forwarded ref, etc).
+
+This ref is wrapped and a new ref is returned at index 2 in the returned array. The returned ref is
+what you must pass to the `ref` property of the element you want to use as the viewport.
+
+Also, if you want plan to use the same viewport for multiple child elements, then the viewport ref
+must be **_chained_** as shown in the example below. This might feel a bit weird at first but this
+chaining is necessary so that we can -
+
+1. Preserve whatever behaviour the incoming viewport ref has (it could be a fn or a object ref)
+2. Have only one viewport ref that can then be passed to the element you want to use as viewport
+
+**Default**: `undefined`
+
+**Example**:
+
+```jsx
+const MyElement = React.forwardRef(function MyElement(props, parentRef) {
+  const [isFirstDivInViewport, firstDiv, wrappedViewportRef] = useIsInViewport({
+    viewport: parentRef
+  })
+  const [isSecondDivInViewport, secondDiv, finalViewportRef] = useIsInViewport({
+    viewport: wrappedViewportRef, // viewport ref is chained
+    threshold: 20
+  })
+
+  return (
+    <section ref={finalViewportRef}>
+      <div ref={firstDiv}>{isFirstDivInViewport ? 'Visible' : 'Nope'}</div>
+      <div ref={secondDiv}>{isSecondDivInViewport ? 'Visible' : 'Nope'}</div>
+    </section>
+  )
+})
+
+
+function App() {
+  const ref = // however you want to create a ref (useRef, raw fn, useCallback, useMemo, React.createRef, etc)
+
+  return <MyElement ref={ref} />
+}
+
+```
+
+#### _options.{modTop, modRight, modBottom, modLeft}_
+
+These values map directly to
+[`rootMargin`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#The_intersection_root_and_root_margin)
+in Intersection Observer API. The can have values similar to the CSS
+[`margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) property.
+
+> The values in rootMargin define offsets added to each side of the intersection root's bounding box
+> to create the final intersection root bounds.
+
+**Defaults**:
+
+- `modTop`: `'0px'`
+- `modRight`: `'0px'`
+- `modBottom`: `'0px'`
+- `modLeft`: `'0px'`
+
+**Example**:
+
+```jsx
+...
+const [isInViewport, targetRef] = useIsInViewport({
+  modTop: '10px',
+  modRight: '1em',
+  modBottom: '2.5rem',
+  modLeft: '10%'
+})
+...
+```
+
+## Example usage
+
+A CRA based example app (which is also used in the test suite) can be found under
+[examples/cra](examples/cra). Inline examples showcasing use-cases are below.
 
 ### Example 1: Element with its parent document as viewport
 
@@ -146,12 +263,12 @@ export default function SimpleElement() {
 
 ```
 
-More example coming soon...
+More examples coming soon...
 
 ## Tasks
 
 - [x] Setup the hook to work with CRA, codesandbox and standalone react app
 - [x] Write the hook in a way that can be tested with Cypress
-- [x] Write tests
 - [x] Setup CI
-- [ ] Write awesome docs!
+- [ ] Increase test coverage⏳
+- [ ] Write awesome docs!⏳
