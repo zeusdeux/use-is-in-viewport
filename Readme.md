@@ -41,8 +41,8 @@ playing around attempting to write a generic `useIntersectionObserver` hook. I g
 in favour of a more directed hook. One which solves a problem that I and many other devs have.
 
 The following guiding principles in combination with the
-[community](https://twitter.com/muditameta/status/1117854963911340042?s=12) helped shape the api for
-this hook.
+[community](https://twitter.com/muditameta/status/1117854963911340042?s=12) helped shape the api and
+serve as a north star for this hook.
 
 ### Guiding principles
 
