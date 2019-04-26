@@ -78,8 +78,11 @@ this hook.
 Please note that this hook declares `react` and as _peer dependency_. Therefore, you must have
 `react` installed to use this package.
 
-Please [open an issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if this default
-causes a problem in your application.
+**Note**: This hook relies on [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) and hence if you want to use it in a browser that doesn't
+support it, the onus of shipping the polyfill is on the developer.
+
+Please [open an issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if these defaults
+cause a problem in your application.
 
 ## API
 
