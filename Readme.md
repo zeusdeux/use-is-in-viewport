@@ -7,6 +7,8 @@ A react hook to use the
 declaratively in your React app for the purposes of finding out if an element is in a given
 viewport.
 
+[![Edit use-intersection-observer example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/54r7k92m04?fontsize=14)
+
 - [Motivation](#motivation)
 - [Guiding principles](#guiding-principles)
 - [Installation](#installation)
