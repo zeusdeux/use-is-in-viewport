@@ -10,7 +10,7 @@ export type HookOptions = Partial<
 >
 
 export default function useIsInViewport(
-  options: HookOptions
+  options: HookOptions = {}
 ): [boolean | null, CallbackRef, CallbackRef] {
   const [isInViewport, setIsInViewport] = useState<boolean | null>(null)
   const { target, viewport, ...restOpts } = options
