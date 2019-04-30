@@ -1,5 +1,24 @@
-import { css } from 'emotion'
+import { css, injectGlobal } from 'emotion'
 
+injectGlobal`
+  :root {
+    --offset: 0vh;
+  }
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
+export const nav = css`
+  display: flex;
+  height: 50px;
+  padding: 10px 0;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+`
 export const container = css`
   font-family: sans-serif;
   text-align: center;
@@ -9,6 +28,8 @@ export const container = css`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: auto;
+  width: 100%;
 `
 
 export const growContainer = css`
@@ -28,12 +49,25 @@ export const box = css`
   box-sizing: border-box;
 `
 
+export const offset = css`
+  margin-left: 20px;
+  --offset: 10vh;
+`
+
 export const inWindowViewport = css`
   top: 55vh;
 `
 
 export const outsideWindowViewport = css`
   top: 150vh;
+`
+
+export const inContainerViewport = css`
+  top: calc(var(--offset) + 20vh);
+`
+
+export const outsideContainerViewport = css`
+  top: calc(var(--offset) + 60vh);
 `
 
 export const visible = css`

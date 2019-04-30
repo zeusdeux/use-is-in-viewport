@@ -1,83 +1,65 @@
-import { cx } from 'emotion'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import useIsInViewport from './use-is-in-viewport'
+import { button, nav } from './styles'
 import {
-  container,
-  growContainer,
-  box,
-  inWindowViewport,
-  outsideWindowViewport,
-  visible,
-  altVisible,
-  button
-} from './styles'
-// import { RefForwardingElement } from './viewportParentDocument'
+  SimpleElement as DocViewportSimple,
+  RefForwardingElement as DocViewportRefForwading
+} from './viewportParentDocument'
+import {
+  SimpleElement as ParentElementViewportSimple,
+  RefForwardingElement as ParentElementViewportRefForwading
+} from './viewportAnotherElement'
 
 function App() {
-  const parentRef = React.useRef(null)
-
-  const [isInViewport1, boxEl1, parentCbRef] = useIsInViewport({
-    viewport: parentRef
-  })
-  const [isInViewport2, boxEl2] = useIsInViewport({
-    threshold: [50]
-  })
-  const [isLarge, toggleContainerSize] = React.useState(false)
+  const [testToShow, setTestToShow] = React.useState(1)
+  const forwardedTargetRef = node => console.log('target', node)
+  const forwardedViewportRef = node => console.log('viewport', node)
 
   return (
     <>
-      <button
-        className={button}
-        data-testid="toggle-container-size"
-        onClick={() => toggleContainerSize(isLarge => !isLarge)}
-      >
-        {isLarge ? 'Shrink' : 'Grow'} container
-      </button>
-      <div
-        className={cx(container, {
-          [growContainer]: isLarge
-        })}
-        ref={parentCbRef}
-      >
-        <div
-          className={cx(box, inWindowViewport, {
-            [visible]: isInViewport1
-          })}
-          ref={boxEl1}
-          data-testid="div-viewport-parent-el"
+      <nav className={nav}>
+        <button
+          className={button}
+          onClick={() => setTestToShow(v => ([0, 2, 3, 4].includes(v) ? 1 : 0))}
+          data-testid="toggle-simple-parent-doc-test"
         >
-          <p>{isInViewport1 ? 'Intersecting with parent' : 'Not intersecting with parent'}</p>
-        </div>
-        <div
-          className={cx(box, outsideWindowViewport, {
-            [altVisible]: isInViewport2
-          })}
-          ref={boxEl2}
-          data-testid="div-viewport-window"
+          {testToShow !== 1 ? 'Show simple parent doc test' : 'Hide simple parent doc test'}
+        </button>
+        <button
+          className={button}
+          onClick={() => setTestToShow(v => ([0, 1, 3, 4].includes(v) ? 2 : 0))}
+          data-testid="toggle-ref-forwarding-parent-doc-test"
         >
-          <p>{isInViewport2 ? 'Visible' : 'Hidden'}</p>
-        </div>
-      </div>
+          {testToShow !== 2 ? 'Show ref fwd parent doc test' : 'Hide ref fwd parent doc test'}
+        </button>
+        <button
+          className={button}
+          onClick={() => setTestToShow(v => ([0, 1, 2, 4].includes(v) ? 3 : 0))}
+          data-testid="toggle-simple-parent-element-test"
+        >
+          {testToShow !== 3 ? 'Show simple parent element test' : 'Hide simple parent element test'}
+        </button>
+        <button
+          className={button}
+          onClick={() => setTestToShow(v => ([0, 1, 2, 3].includes(v) ? 4 : 0))}
+          data-testid="toggle-ref-forwarding-parent-element-test"
+        >
+          {testToShow !== 4
+            ? 'Show ref fwd parent element test'
+            : 'Hide ref fwd parent element test'}
+        </button>
+      </nav>
+      {testToShow !== 1 ? null : <DocViewportSimple />}
+      {testToShow !== 2 ? null : (
+        <DocViewportRefForwading threshold={50} ref={forwardedTargetRef} />
+      )}
+      {testToShow !== 3 ? null : <ParentElementViewportSimple />}
+      {testToShow !== 4 ? null : (
+        <ParentElementViewportRefForwading ref={forwardedViewportRef} threshold={75} />
+      )}
     </>
   )
 }
-
-// function App2() {
-//   const forwardRef = React.useCallback(node => {
-//     console.log('node ->', node)
-//   })
-//   const [showElement, toggleElement] = React.useState(true)
-
-//   return (
-//     <>
-//       <button onClick={_ => toggleElement(v => !v)}>
-//         {showElement ? 'Hide Element' : 'Show Element'}
-//       </button>
-//       {showElement ? <RefForwardingElement ref={forwardRef} threshold={75} /> : null}
-//     </>
-//   )
-// }
 
 async function run() {
   if (!window.IntersectionObserver) {

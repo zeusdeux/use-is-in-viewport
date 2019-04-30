@@ -4,8 +4,8 @@ import useIsInViewport from './use-is-in-viewport'
 import { box, button, inWindowViewport, outsideWindowViewport, visible } from './styles'
 
 export function SimpleElement() {
-  const [isInViewport, childElToWatch] = useIsInViewport()
-  const [hide, toggleHide] = React.useState(false)
+  const [isInViewport, childRef] = useIsInViewport()
+  const [hidden, toggleHide] = React.useState(false)
 
   return (
     <>
@@ -14,16 +14,16 @@ export function SimpleElement() {
         onClick={() => toggleHide(h => !h)}
         data-testid="toggle-box-position"
       >
-        {hide ? 'Show box' : 'Hide box'}
+        {hidden ? 'Show box' : 'Hide box'}
       </button>
       <div
         className={cx(box, {
-          [inWindowViewport]: !hide,
-          [outsideWindowViewport]: hide,
+          [inWindowViewport]: !hidden,
+          [outsideWindowViewport]: hidden,
           [visible]: isInViewport
         })}
         data-testid="box"
-        ref={childElToWatch}
+        ref={childRef}
       >
         <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
       </div>
@@ -48,7 +48,7 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
     target: ref,
     threshold // if threshold is passed as an option, it MUST be a number or number[]
   })
-  const [hide, toggleHide] = React.useState(false)
+  const [hidden, toggleHide] = React.useState(false)
 
   return (
     <>
@@ -57,12 +57,12 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
         onClick={() => toggleHide(h => !h)}
         data-testid="toggle-box-position"
       >
-        {hide ? 'Show box' : 'Hide box'}
+        {hidden ? 'Show box' : 'Hide box'}
       </button>
       <div
         className={cx(box, {
-          [inWindowViewport]: !hide,
-          [outsideWindowViewport]: hide,
+          [inWindowViewport]: !hidden,
+          [outsideWindowViewport]: hidden,
           [visible]: isInViewport
         })}
         data-testid="box"
