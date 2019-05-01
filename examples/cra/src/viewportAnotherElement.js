@@ -67,7 +67,7 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
       >
         {hidden ? 'Show boxes' : 'Hide boxes'}
       </button>
-      <div ref={finalParentRef} data-testid="viewport" className={container}>
+      <div ref={finalParentRef} data-testid="viewport" className={cx('viewport', container)}>
         <div
           ref={firstChildWrappedRef}
           data-testid="first-child"

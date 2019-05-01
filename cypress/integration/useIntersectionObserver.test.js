@@ -81,5 +81,9 @@ describe('useIsInViewport', () => {
     cy.get('[data-testid="viewport"]').scrollTo(0, 250) // 75% or more of second child in viewport
     cy.get('[data-testid="first-child"]').should('contain', 'First child >= 75% in viewport')
     cy.get('[data-testid="second-child"]').should('contain', 'Second child >= 75% in viewport')
+    cy.window().then(window => {
+      expect(window.forwardedViewportRef).length(1)
+      expect(window.forwardedViewportRef[0].classList.contains('viewport')).to.be.true
+    })
   })
 })
