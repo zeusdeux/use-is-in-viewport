@@ -24,6 +24,7 @@
     "start-for-cypress": "./node_modules/.bin/serve -n -l 3000 ./build & ./node_modules/.bin/wait-on http://localhost:3000",
     "start": "npm run copy-hook && react-scripts start",
     "build": "npm run copy-hook && react-scripts build",
+    "prenow-build": "cd ../../ && npm i && npm run build:esm",
     "now-build": "npm run build",
     "test": "npm run copy-hook && react-scripts test --env=jsdom",
     "eject": "npm run copy-hook && react-scripts eject"
