@@ -256,18 +256,17 @@ As soon as at least 1px of the child element is visible in the parent document v
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import useIsInViewport from 'use-is-in-viewport
+import useIsInViewport from 'use-is-in-viewport'
 
 export default function SimpleElement() {
   const [isInViewport, childElToWatch] = useIsInViewport()
 
   return (
-      <div ref={childElToWatch}>
-        <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
-      </div>
+    <div ref={childElToWatch}>
+      <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
+    </div>
   )
 }
-
 ```
 
 More examples coming soon...
