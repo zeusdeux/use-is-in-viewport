@@ -278,5 +278,5 @@ More examples coming soon...
 - [x] Setup CI
 - [x] Increase test coverage
 - [x] Write awesome docs!
-  - [x] Deploy example app to [useisinviewport.zdx.cat/](https://useisinviewport.zdx.cat/)
+  - [x] Deploy example app to [useisinviewport.zdx.cat](https://useisinviewport.zdx.cat/)
   - [x] Document the motivation and API in the readme
