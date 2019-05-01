@@ -12,8 +12,14 @@ import {
 
 function App() {
   const [testToShow, setTestToShow] = React.useState(1)
-  const forwardedTargetRef = node => console.log('target', node)
-  const forwardedViewportRef = node => console.log('viewport', node)
+  const forwardedTargetRef = node => {
+    window.forwardedTargetRef = window.forwardedTargetRef || []
+    window.forwardedTargetRef.push(node)
+  }
+  const forwardedViewportRef = node => {
+    window.forwardedViewportRef = window.forwardedViewportRef || []
+    window.forwardedViewportRef.push(node)
+  }
 
   return (
     <>

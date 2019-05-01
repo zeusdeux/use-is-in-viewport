@@ -42,10 +42,10 @@ export function SimpleElement() {
 
 export const RefForwardingElement = React.forwardRef(function RefForwardingElement(
   { threshold = 10 }, // default value for threshold so that we don't pass it in as undefined
-  ref
+  targetRef
 ) {
   const [isInViewport, childRef] = useIsInViewport({
-    target: ref,
+    target: targetRef,
     threshold // if threshold is passed as an option, it MUST be a number or number[]
   })
   const [hidden, toggleHide] = React.useState(false)
@@ -60,7 +60,7 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
         {hidden ? 'Show box' : 'Hide box'}
       </button>
       <div
-        className={cx(box, {
+        className={cx('target-div', box, {
           [inWindowViewport]: !hidden,
           [outsideWindowViewport]: hidden,
           [visible]: isInViewport
