@@ -3,6 +3,7 @@ import { cx } from 'emotion'
 import useIsInViewport from './use-is-in-viewport'
 import {
   altVisible,
+  app,
   box,
   button,
   container,
@@ -16,7 +17,7 @@ export function SimpleElement() {
   const [hidden, toggleHide] = React.useState(false)
 
   return (
-    <>
+    <div className={app}>
       <button
         className={button}
         onClick={() => toggleHide(h => !h)}
@@ -37,7 +38,7 @@ export function SimpleElement() {
           <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -58,7 +59,7 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
   const [hidden, toggleHide] = React.useState(false)
 
   return (
-    <>
+    <div className={app}>
       <button
         className={button}
         onClick={() => toggleHide(h => !h)}
@@ -76,7 +77,9 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
             [altVisible]: isFirstInViewport
           })}
         >
-          <p>{isFirstInViewport ? 'First child in viewport' : 'First child out of viewport'}</p>
+          <p>
+            {isFirstInViewport ? 'First child >= 75% in viewport' : 'First child out of viewport'}
+          </p>
         </div>
         <div
           ref={secondChildRef}
@@ -87,9 +90,13 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
             [altVisible]: isSecondInViewport
           })}
         >
-          <p>{isSecondInViewport ? 'Second child in viewport' : 'Second child out of viewport'}</p>
+          <p>
+            {isSecondInViewport
+              ? 'Second child >= 75% in viewport'
+              : 'Second child out of viewport'}
+          </p>
         </div>
       </div>
-    </>
+    </div>
   )
 })

@@ -1,14 +1,14 @@
 import React from 'react'
 import { cx } from 'emotion'
 import useIsInViewport from './use-is-in-viewport'
-import { box, button, inWindowViewport, outsideWindowViewport, visible } from './styles'
+import { app, box, button, inWindowViewport, outsideWindowViewport, visible } from './styles'
 
 export function SimpleElement() {
   const [isInViewport, childRef] = useIsInViewport()
   const [hidden, toggleHide] = React.useState(false)
 
   return (
-    <>
+    <div className={app}>
       <button
         className={button}
         onClick={() => toggleHide(h => !h)}
@@ -27,7 +27,7 @@ export function SimpleElement() {
       >
         <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -51,7 +51,7 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
   const [hidden, toggleHide] = React.useState(false)
 
   return (
-    <>
+    <div className={app}>
       <button
         className={button}
         onClick={() => toggleHide(h => !h)}
@@ -70,6 +70,6 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
       >
         <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
       </div>
-    </>
+    </div>
   )
 })

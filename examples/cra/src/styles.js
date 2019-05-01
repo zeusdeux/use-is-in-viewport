@@ -11,6 +11,22 @@ injectGlobal`
   }
 `
 
+export const button = css`
+  height: 30px;
+  width: 100%;
+`
+
+export const app = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  & > button {
+    position: fixed;
+    margin-top: 51px;
+  }
+`
+
 export const nav = css`
   display: flex;
   height: 50px;
@@ -18,7 +34,9 @@ export const nav = css`
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
+  position: fixed;
 `
+
 export const container = css`
   font-family: sans-serif;
   text-align: center;
@@ -30,6 +48,7 @@ export const container = css`
   justify-content: center;
   overflow: auto;
   width: 100%;
+  margin-top: 94px;
 `
 
 export const growContainer = css`
@@ -77,9 +96,4 @@ export const visible = css`
 export const altVisible = css`
   background: orange;
   color: black;
-`
-
-export const button = css`
-  height: 30px;
-  width: 100%;
 `
