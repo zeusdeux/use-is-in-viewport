@@ -80,8 +80,10 @@ serve as a north star for this hook.
 Please note that this hook declares `react` and as _peer dependency_. Therefore, you must have
 `react` installed to use this package.
 
-**Note**: This hook relies on [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) and hence if you want to use it in a browser that doesn't
-support it, the onus of shipping the polyfill is on the developer.
+**Note**: This hook relies on
+[Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+and hence if you want to use it in a browser that doesn't support it, the onus of shipping the
+polyfill is on the developer.
 
 Please [open an issue](https://github.com/zeusdeux/use-is-in-viewport/issues/new) if these defaults
 cause a problem in your application.
@@ -275,5 +277,7 @@ More examples coming soon...
 - [x] Setup the hook to work with CRA, codesandbox and standalone react app
 - [x] Write the hook in a way that can be tested with Cypress
 - [x] Setup CI
-- [ ] Increase test coverage⏳
-- [ ] Write awesome docs!⏳
+- [x] Increase test coverage
+- [x] Write awesome docs!
+  - [x] Deploy example app to [useisinviewport.zdx.cat/](https://useisinviewport.zdx.cat/)
+  - [x] Document the motivation and API in the readme
