@@ -1,1 +1,8 @@
-**/*
+.gitignore
+.prettierrc
+.tern*
+LICENSE
+**/Readme.md
+cypress*
+node_modules
+.circleci

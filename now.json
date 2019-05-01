@@ -2,14 +2,32 @@
   "name": "useIsInViewport",
   "version": 2,
   "alias": ["useIsInViewport.zdx.cat"],
+  "builds": [
+    {
+      "src": "examples/cra/package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
   "routes": [
     {
-      "src": ".*",
-      "methods": ["GET"],
-      "status": 302,
-      "headers": {
-        "Location": "https://codesandbox.io/s/54r7k92m04"
-      }
+      "src": "/static/(.*)",
+      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "dest": "/examples/cra/static/$1"
+    },
+    { "src": "/favicon.ico", "dest": "/examples/cra/favicon.ico" },
+    { "src": "/asset-manifest.json", "dest": "/examples/cra/asset-manifest.json" },
+    { "src": "/manifest.json", "dest": "/examples/cra/manifest.json" },
+    { "src": "/precache-manifest.(.*)", "dest": "/examples/cra/precache-manifest.$1" },
+    {
+      "src": "/service-worker.js",
+      "headers": { "cache-control": "s-maxage=0" },
+      "dest": "/examples/cra/service-worker.js"
+    },
+    {
+      "src": "/(.*)",
+      "headers": { "cache-control": "s-maxage=0" },
+      "dest": "/examples/cra/index.html"
     }
   ]
 }
