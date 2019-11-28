@@ -20,7 +20,6 @@ viewport.
     - [options.viewport](#optionsviewport)
     - [options.{modTop, modRight, modBottom, modLeft}](#optionsmodtop-modright-modbottom-modleft)
 - [Example usage](#example-usage)
-- [Tasks](#tasks)
 
 ## Motivation
 
@@ -246,37 +245,141 @@ const [isInViewport, targetRef] = useIsInViewport({
 ## Example usage
 
 A CRA based example app (which is also used in the test suite) can be found under
-[examples/cra](examples/cra). Inline examples showcasing use-cases are below.
+[examples/cra](examples/cra). Inline examples showcasing some of the use-cases are below.
 
 ### Example 1: Element with its parent document as viewport
 
-As soon as at least 1px of the child element is visible in the parent document viewport,
-`isInViewport` evaluates to true.
+As soon as at least 1px of the target `div` is visible in the parent document viewport,
+`isInViewport` evaluates to `true`.
 
 ```jsx
 import React from 'react'
-import ReactDOM from 'react-dom'
 import useIsInViewport from 'use-is-in-viewport'
 
-export default function SimpleElement() {
-  const [isInViewport, childElToWatch] = useIsInViewport()
+export default function MyElement() {
+  const [isInViewport, targetRef] = useIsInViewport()
 
   return (
-    <div ref={childElToWatch}>
+    <div ref={targetRef}>
       <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
     </div>
   )
 }
 ```
 
-More examples coming soon...
+### Example 2: Element with a custom viewport
 
-## Tasks
+As soon as at least 1px of the target `div` is visible in its parent `div` (chosen as the parent by
+passing `viewportRef` to it), `isInViewport` evaluates to `true`.
 
-- [x] Setup the hook to work with CRA, codesandbox and standalone react app
-- [x] Write the hook in a way that can be tested with Cypress
-- [x] Setup CI
-- [x] Increase test coverage
-- [x] Write awesome docs!
-  - [x] Deploy example app to [useisinviewport.zdx.cat](https://useisinviewport.zdx.cat/)
-  - [x] Document the motivation and API in the readme
+```jsx
+import React from 'react'
+import useIsInViewport from 'use-is-in-viewport'
+
+export default function MyElement() {
+  const [isInViewport, targetRef, viewportRef] = useIsInViewport()
+
+  return (
+    <div ref={viewportRef}>
+      <div ref={targetRef}>
+        <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
+      </div>
+    </div>
+  )
+}
+```
+
+### Example 3: Using a forwarded ref for the target element
+
+In some cases, the parent element might want to control the `ref` of some element inside your
+component. It is obviously up to your component to decide what element to assign the incoming `ref`.
+
+In this example, we assign the incoming `ref` to the target element that we are watching for in the
+document viewport. To do so, we thread it through `useIsInViewport` hook by using the `target`
+option and assining the incoming `ref` to it. The hook takes care of updating the incoming `ref`
+such that it is completely transparent to the parent element that passed the `ref` in.
+
+```jsx
+import React from 'react'
+import useIsInViewport from 'use-is-in-viewport'
+
+export const RefForwardingElement = React.forwardRef(function RefForwardingElement(
+  props,
+  incomingTargetRef
+) {
+  const [isInViewport, targetRef] = useIsInViewport({
+    target: incomingTargetRef // thread the incoming target ref through the hook
+  })
+
+  return (
+    <div ref={targetRef}>
+      <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
+    </div>
+  )
+})
+```
+
+### Example 4: Using a forwarded ref for the viewport element
+
+Same as the previous example, but here we thread the incoming `ref` into the viewport element
+instead of the target element.
+
+```jsx
+import React from 'react'
+import useIsInViewport from 'use-is-in-viewport'
+
+export const RefForwardingElement = React.forwardRef(function RefForwardingElement(
+  props,
+  incomingViewportRef
+) {
+  const [isInViewport, targetRef, viewportRef] = useIsInViewport({
+    viewport: incomingViewportRef // thread the incoming viewport ref through the hook
+  })
+
+  return (
+    <div ref={viewportRef}>
+      <div ref={targetRef}>
+        <p>{isInViewport ? 'In viewport' : 'Out of viewport'}</p>
+      </div>
+    </div>
+  )
+})
+```
+
+### Example 5: Tracking visibility in a custom viewport of multiple elements
+
+In this example, we have a custom viewport element and we want to track whether its child `divs` are
+in viewport or not. We have also chosen to use different `threshold`s for the two child target
+`divs`.
+
+As you might notice, we thread the `viewport` ref from the first call to `useIsInViewport` into the
+second call to `useIsInViewport`. This is because an element can only be assigned one `ref`. And
+here that element is the viewport element. Therefore, we use the transparent `ref` update capability
+of `useIsInViewport` (as shown in the previous examples) to wrap the viewport `ref` from the first
+call of the hook with a new one that is then passed to the viewport `div`.
+
+```jsx
+import React from 'react'
+import useIsInViewport from 'use-is-in-viewport'
+
+export default function MyElement() {
+  const [isDivOneInViewport, divOneTargetRef, viewportRefToChain] = useIsInViewport({
+    threshold: 50
+  })
+  const [isDivTwoInViewport, divTwoTargetRef, viewportRef] = useIsInViewport({
+    viewport: viewportRefToChain,
+    threshold: 75
+  })
+
+  return (
+    <div ref={viewportRef}>
+      <div ref={divOneTargetRef}>
+        <p>{isDivOneInViewport ? 'Div one In viewport' : 'Div one out of viewport'}</p>
+      </div>
+      <div ref={divTwoTargetRef}>
+        <p>{isDivTwoInViewport ? 'Div two in viewport' : 'Div two out of viewport'}</p>
+      </div>
+    </div>
+  )
+}
+```
