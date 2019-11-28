@@ -6,6 +6,11 @@ describe('useIsInViewport', () => {
   it('should report correctly when an element is visible in parent document', () => {
     cy.get('[data-testid="toggle-simple-parent-doc-test"]').should(
       'contain',
+      'Show simple parent doc test'
+    )
+    cy.get('[data-testid="toggle-simple-parent-doc-test"]').click()
+    cy.get('[data-testid="toggle-simple-parent-doc-test"]').should(
+      'contain',
       'Hide simple parent doc test'
     )
     cy.get('[data-testid="box"]').should('contain', 'In viewport')

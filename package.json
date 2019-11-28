@@ -44,6 +44,10 @@
       "tslint --fix",
       "git add"
     ],
+    "cypress/integration/**/*.js": [
+      "prettier --write",
+      "git add"
+    ],
     "*.{json,md,html,css}": [
       "prettier --write",
       "git add"

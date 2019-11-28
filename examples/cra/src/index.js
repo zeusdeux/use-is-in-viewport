@@ -11,7 +11,7 @@ import {
 } from './viewportAnotherElement'
 
 function App() {
-  const [testToShow, setTestToShow] = React.useState(1)
+  const [testToShow, setTestToShow] = React.useState(0)
   const forwardedTargetRef = node => {
     window.forwardedTargetRef = window.forwardedTargetRef || []
     window.forwardedTargetRef.push(node)
