@@ -20,7 +20,6 @@ viewport.
     - [options.viewport](#optionsviewport)
     - [options.{modTop, modRight, modBottom, modLeft}](#optionsmodtop-modright-modbottom-modleft)
 - [Example usage](#example-usage)
-- [Tasks](#tasks)
 
 ## Motivation
 
