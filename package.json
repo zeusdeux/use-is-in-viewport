@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.8.13",
-    "cypress": "^3.2.0",
+    "cypress": "^3.7.0",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
     "prettier": "1.16.4",
