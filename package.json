@@ -25,7 +25,7 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "observe-element-in-viewport": "0.0.12"
+    "observe-element-in-viewport": "0.0.13"
   },
   "peerDependencies": {
     "react": "^16.8.6"
