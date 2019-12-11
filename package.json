@@ -25,7 +25,7 @@
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "observe-element-in-viewport": "0.0.13"
+    "observe-element-in-viewport": "0.0.14"
   },
   "peerDependencies": {
     "react": "^16.8.6"
@@ -62,6 +62,7 @@
   "module": "built/es9-esm/src/index.js",
   "es": "built/es9-esm/src/index.js",
   "main-es": "built/es9-esm/src/index.js",
+  "sideEffects": false,
   "keywords": [
     "react",
     "hook",
