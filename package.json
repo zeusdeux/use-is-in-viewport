@@ -60,7 +60,7 @@
   },
   "name": "use-is-in-viewport",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
-  "version": "1.0.7-beta.2",
+  "version": "1.0.7",
   "source": "src/index.ts",
   "main": "built/index.umd.js",
   "module": "built/index.esm.js",
