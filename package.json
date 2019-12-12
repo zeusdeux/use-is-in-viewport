@@ -5,14 +5,14 @@
     "lint": "tslint -p ./tsconfig.json",
     "bundle": "microbundle -f es,umd --tsconfig ./tsconfig.json",
     "build": "npm run typecheck && npm run lint && npm run bundle",
-    "prepare": "npm run build",
+    "prepack": "npm run build",
     "watch": "microbundle watch",
-    "cra:build": "cd examples/cra/ && pwd && npm run build",
+    "cra:build": "npm run build && npm link && cd examples/cra/ && pwd && npm run build",
     "cra:start": "cd examples/cra/ && pwd && npm run start-for-cypress",
     "cra:stop": "cd examples/cra/ && pwd && npm run kill-old-server",
     "cypress:run": "echo \"Starting cypress...\" && cypress run",
-    "test": "npm run build && npm run cra:build && npm run cra:start && npm run cypress:run && npm run cra:stop",
-    "test-ci": "npm run build && npm run cra:build && npm run cra:start && npm run cypress:run",
+    "test": "npm run cra:build && npm run cra:start && npm run cypress:run && npm run cra:stop",
+    "test-ci": "npm run cra:build && npm run cra:start && npm run cypress:run",
     "prettier": "prettier --config ./.prettierrc --write \"{src,test,bin,lib,config}/**/*.{ts,json,css,html,md}\""
   },
   "devDependencies": {
