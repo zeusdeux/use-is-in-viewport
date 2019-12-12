@@ -16,7 +16,7 @@ jobs:
           name: 'Install CRA example dependencies'
           command: |
             cd examples/cra/
-            npm ci
+            npm i
       - run:
           name: 'Run tests'
           command: npm run test-ci
