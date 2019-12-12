@@ -76,6 +76,11 @@ serve as a north star for this hook.
 
 `npm install use-is-in-viewport`
 
+`yarn` or any other package manager will also work.
+
+You can also directly import the module from [`unpkg`](https://unpkg.com/) either in your html or in
+your javascript.
+
 Please note that this hook declares `react` and as _peer dependency_. Therefore, you must have
 `react` installed to use this package.
 
