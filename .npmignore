@@ -47,3 +47,8 @@ now.json
 examples/
 cypress/
 built/**/*.tsbuildinfo
+.rts2_cache*/
+.cache*/
+src/
+tsconfig.json
+tslint.json

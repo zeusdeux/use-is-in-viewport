@@ -1,7 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "target": "es5",
-    "outDir": "./built/es5-cjs"
-  }
-}
