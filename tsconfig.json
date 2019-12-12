@@ -1,1 +1,26 @@
-tsconfig.es9.esm.json
+{
+  "compilerOptions": {
+    "lib": ["es2018", "dom", "dom.iterable"],
+    "jsx": "react",
+    "project": "./",
+
+    "target": "es2018",
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "./built/es9-esm",
+    "sourceMap": true,
+
+    "strict": true,
+    "noEmitOnError": true,
+    "noErrorTruncation": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "built/**"]
+}

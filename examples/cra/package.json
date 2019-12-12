@@ -6,8 +6,8 @@
   "main": "src/index.js",
   "dependencies": {
     "emotion": "10.0.9",
+    "use-is-in-viewport": "*",
     "intersection-observer": "0.5.1",
-    "observe-element-in-viewport": "0.0.12",
     "prettier": "^1.17.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
@@ -19,15 +19,14 @@
     "wait-on": "^3.2.0"
   },
   "scripts": {
-    "copy-hook": "cp ../../built/es9-esm/src/index.js src/use-is-in-viewport.js",
     "kill-old-server": "pkill -f \"serve -n -l 3000 ./build\" || :",
     "start-for-cypress": "./node_modules/.bin/serve -n -l 3000 ./build & ./node_modules/.bin/wait-on http://localhost:3000",
-    "start": "npm run copy-hook && react-scripts start",
-    "build": "npm run copy-hook && react-scripts build",
-    "prenow-build": "cd ../../ && npm i && npm run build:esm",
+    "start": "react-scripts start",
+    "build": "npm link use-is-in-viewport && react-scripts build",
+    "prenow-build": "cd ../../ && npm i && npm run build",
     "now-build": "npm run build",
-    "test": "npm run copy-hook && react-scripts test --env=jsdom",
-    "eject": "npm run copy-hook && react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",

@@ -1,17 +1,18 @@
 {
   "scripts": {
-    "build": "npm run lint && npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc -p ./tsconfig.es5.cjs.json",
-    "build:esm": "tsc -p ./tsconfig.es9.esm.json",
-    "prepare": "npm run build",
-    "watch": "tsc --watch",
+    "clean": "rimraf built",
+    "typecheck": "tsc --noEmit -p .",
     "lint": "tslint -p ./tsconfig.json",
-    "cra:build": "cd examples/cra/ && pwd && npm run build",
+    "bundle": "microbundle -f es,umd --tsconfig ./tsconfig.json",
+    "build": "npm run typecheck && npm run lint && npm run bundle",
+    "prepack": "npm run build",
+    "watch": "microbundle watch",
+    "cra:build": "npm run build && npm link && cd examples/cra/ && pwd && npm run build",
     "cra:start": "cd examples/cra/ && pwd && npm run start-for-cypress",
     "cra:stop": "cd examples/cra/ && pwd && npm run kill-old-server",
     "cypress:run": "echo \"Starting cypress...\" && cypress run",
-    "test": "npm run build:esm && npm run cra:stop && npm run cra:build && npm run cra:start && npm run cypress:run && npm run cra:stop",
-    "test-ci": "npm run build:esm && npm run cra:build && npm run cra:start && npm run cypress:run",
+    "test": "npm run cra:build && npm run cra:start && npm run cypress:run && npm run cra:stop",
+    "test-ci": "npm run cra:build && npm run cra:start && npm run cypress:run",
     "prettier": "prettier --config ./.prettierrc --write \"{src,test,bin,lib,config}/**/*.{ts,json,css,html,md}\""
   },
   "devDependencies": {
@@ -19,13 +20,15 @@
     "cypress": "^3.7.0",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
+    "microbundle": "^0.11.0",
     "prettier": "1.16.4",
+    "rimraf": "^3.0.0",
     "tslint": "^5.15.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3"
   },
   "dependencies": {
-    "observe-element-in-viewport": "0.0.14"
+    "observe-element-in-viewport": "0.0.15"
   },
   "peerDependencies": {
     "react": "^16.8.6"
@@ -40,8 +43,9 @@
   },
   "lint-staged": {
     "*.ts": [
-      "prettier --write",
+      "tsc --noEmit -p .",
       "tslint --fix",
+      "prettier --write",
       "git add"
     ],
     "*.{json,md,html,css}": [
@@ -56,12 +60,11 @@
   },
   "name": "use-is-in-viewport",
   "description": "A react hook to use the IntersectionObserver declaratively in your React app.",
-  "version": "1.0.6",
-  "main": "built/es5-cjs/src/index.js",
-  "types": "built/es5-cjs/src/index.d.ts",
-  "module": "built/es9-esm/src/index.js",
-  "es": "built/es9-esm/src/index.js",
-  "main-es": "built/es9-esm/src/index.js",
+  "version": "1.0.7-beta.1",
+  "source": "src/index.ts",
+  "main": "built/index.umd.js",
+  "module": "built/index.esm.js",
+  "types": "built/src/index.d.ts",
   "sideEffects": false,
   "keywords": [
     "react",

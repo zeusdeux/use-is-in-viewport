@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "target": "es2018",
-    "module": "es6",
-    "moduleResolution": "node",
-    "outDir": "./built/es9-esm"
-  }
-}

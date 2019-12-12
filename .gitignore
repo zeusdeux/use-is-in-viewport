@@ -82,3 +82,5 @@ built/
 /package-lock.json
 cypress/screenshots
 cypress/videos
+.rts2_cache*/
+.cache*/

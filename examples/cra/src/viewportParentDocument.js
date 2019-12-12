@@ -1,6 +1,6 @@
 import React from 'react'
 import { cx } from 'emotion'
-import useIsInViewport from './use-is-in-viewport'
+import useIsInViewport from 'use-is-in-viewport'
 import { app, box, button, inWindowViewport, outsideWindowViewport, visible } from './styles'
 
 export function SimpleElement() {
