@@ -4,7 +4,7 @@
     "typecheck": "tsc --noEmit -p .",
     "lint": "tslint -p ./tsconfig.json",
     "bundle": "microbundle -f es,umd --tsconfig ./tsconfig.json",
-    "build": "npm run typecheck && npm run lint && npm run bundle",
+    "build": "npm run clean && npm run typecheck && npm run lint && npm run bundle",
     "prepack": "npm run build",
     "watch": "microbundle watch",
     "cra:build": "npm run build && npm link && cd examples/cra/ && pwd && npm run build",
