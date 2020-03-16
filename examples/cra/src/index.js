@@ -63,6 +63,7 @@ function App() {
         <button
           className={button}
           onClick={toggleExample(5)}
+          data-testid="toggle-conditional-render-child-test"
         >
           {testToShow !== 5
             ? 'Show conditional render child test'
