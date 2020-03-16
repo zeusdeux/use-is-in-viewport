@@ -79,7 +79,6 @@ jspm_packages/
 .tern-*
 TAGS
 built/
-/package-lock.json
 cypress/screenshots
 cypress/videos
 .rts2_cache*/
