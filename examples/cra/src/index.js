@@ -9,7 +9,7 @@ import {
   SimpleElement as ParentElementViewportSimple,
   RefForwardingElement as ParentElementViewportRefForwading
 } from './viewportAnotherElement'
-import { SimpleElement as ConditionalRender } from './conditionalRender';
+import { ConditionalChild, ConditionalViewport } from './conditionalRender';
 
 function App() {
   const [testToShow, setTestToShow] = React.useState(1)
@@ -69,6 +69,15 @@ function App() {
             ? 'Show conditional render child test'
             : 'Hide conditional render child test'}
         </button>
+        <button
+          className={button}
+          onClick={toggleExample(6)}
+          data-testid="toggle-conditional-render-viewport-test"
+        >
+          {testToShow !== 6
+            ? 'Show conditional render viewport test'
+            : 'Hide conditional render viewport test'}
+        </button>
       </nav>
       {testToShow !== 1 ? null : <DocViewportSimple />}
       {testToShow !== 2 ? null : (
@@ -78,7 +87,8 @@ function App() {
       {testToShow !== 4 ? null : (
         <ParentElementViewportRefForwading ref={forwardedViewportRef} threshold={75} />
       )}
-      {testToShow !== 5 ? null : <ConditionalRender />}
+      {testToShow !== 5 ? null : <ConditionalChild />}
+      {testToShow !== 6 ? null : <ConditionalViewport />}
     </>
   )
 }
