@@ -35,10 +35,7 @@ export function ConditionalChild() {
 }
 
 export function ConditionalViewport() {
-  const parentRef = React.useRef(null)
-  const [isInViewport, childRef] = useIsInViewport({
-    viewport: parentRef
-  })
+  const [isInViewport, childRef, parentRef] = useIsInViewport()
   const [hidden, toggleHide] = React.useState(true)
 
   return (
