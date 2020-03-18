@@ -9,7 +9,7 @@ import {
   SimpleElement as ParentElementViewportSimple,
   RefForwardingElement as ParentElementViewportRefForwading
 } from './viewportAnotherElement'
-import { ConditionalChild, ConditionalViewport } from './conditionalRender';
+import { ConditionalChild, ConditionalViewport } from './conditionalRender'
 
 function App() {
   const [testToShow, setTestToShow] = React.useState(1)
@@ -21,10 +21,10 @@ function App() {
     window.forwardedViewportRef = window.forwardedViewportRef || []
     window.forwardedViewportRef.push(node)
   }
-  const toggleExample = (exampleIndex) => () => {
+  const toggleExample = exampleIndex => () => {
     setTestToShow(v => {
-      return v === exampleIndex ? 0 : exampleIndex;
-    });
+      return v === exampleIndex ? 0 : exampleIndex
+    })
   }
 
   return (

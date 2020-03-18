@@ -1,7 +1,15 @@
 import React from 'react'
 import { cx } from 'emotion'
 import useIsInViewport from 'use-is-in-viewport'
-import { app, box, button, container, inWindowViewport, outsideWindowViewport, visible } from './styles'
+import {
+  app,
+  box,
+  button,
+  container,
+  inWindowViewport,
+  outsideWindowViewport,
+  visible
+} from './styles'
 
 export function ConditionalChild() {
   const [isInViewport, childRef] = useIsInViewport()
