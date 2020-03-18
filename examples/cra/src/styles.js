@@ -27,7 +27,7 @@ export const app = css`
   }
   & > p {
     position: fixed;
-    margin-top: 90px;
+    margin-top: 120px;
   }
 `
 
