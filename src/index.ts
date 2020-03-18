@@ -47,7 +47,7 @@ export default function useIsInViewport(
 
   useEffect(() => {
     if (!childRef.current) {
-      return;
+      return
     }
     return observeElementInViewport(
       childRef.current,
