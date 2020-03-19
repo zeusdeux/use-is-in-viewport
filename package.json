@@ -14,7 +14,7 @@
     "test": "npm run cra:build && npm run cra:start && npm run cypress:run && npm run cra:stop",
     "test-ci": "npm run cra:build && npm run cra:start && npm run cypress:run",
     "prettier": "prettier --config ./.prettierrc --write \"{src,test,bin,lib,config}/**/*.{ts,json,css,html,md}\"",
-    "publish": "np"
+    "publish-package": "np"
   },
   "devDependencies": {
     "@types/react": "^16.9.23",
