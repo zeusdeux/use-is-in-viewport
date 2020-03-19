@@ -46,6 +46,9 @@ export default function useIsInViewport(
   )
 
   useEffect(() => {
+    if (!childRef.current) {
+      return
+    }
     return observeElementInViewport(
       childRef.current,
       () => setIsInViewport(true),
@@ -55,7 +58,7 @@ export default function useIsInViewport(
         viewport: parentRef.current
       }
     )
-  }, [childRef, restOpts, parentRef])
+  }, [childRef.current, restOpts, parentRef])
 
   return [isInViewport, childCbRef, parentCbRef]
 }

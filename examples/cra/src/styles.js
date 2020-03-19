@@ -25,6 +25,10 @@ export const app = css`
     position: fixed;
     margin-top: 51px;
   }
+  & > p {
+    position: fixed;
+    margin-top: 120px;
+  }
 `
 
 export const nav = css`

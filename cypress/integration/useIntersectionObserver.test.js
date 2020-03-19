@@ -86,4 +86,43 @@ describe('useIsInViewport', () => {
       expect(window.forwardedViewportRef[0].classList.contains('viewport')).to.be.true
     })
   })
+
+  it('should handle the target not being rendered', () => {
+    cy.get('[data-testid="toggle-conditional-render-child-test"]').should(
+      'contain',
+      'Show conditional render child test'
+    )
+    cy.get('[data-testid="toggle-conditional-render-child-test"]').click()
+    cy.get('[data-testid="toggle-conditional-render-child-test"]').should(
+      'contain',
+      'Hide conditional render child test'
+    )
+    cy.get('[data-testid="box-status"]').should('contain', 'Out of viewport')
+    cy.get('[data-testid="toggle-box-hidden"]').click()
+    cy.get('[data-testid="box-status"]').should('contain', 'In viewport')
+    cy.get('[data-testid="toggle-box-hidden"]').click()
+    cy.get('[data-testid="box-status"]').should('contain', 'Out of viewport')
+  })
+
+  it('should handle the viewport not being rendered', () => {
+    cy.get('[data-testid="toggle-conditional-render-viewport-test"]').should(
+      'contain',
+      'Show conditional render viewport test'
+    )
+    cy.get('[data-testid="toggle-conditional-render-viewport-test"]').click()
+    cy.get('[data-testid="toggle-conditional-render-viewport-test"]').should(
+      'contain',
+      'Hide conditional render viewport test'
+    )
+    cy.get('[data-testid="toggle-viewport-hidden"]').should('contain', 'Show viewport')
+    cy.get('[data-testid="box-status"]').should('contain', 'Out of viewport')
+    cy.get('[data-testid="toggle-viewport-hidden"]').click()
+    cy.get('[data-testid="toggle-viewport-hidden"]').should('contain', 'Hide viewport')
+    cy.get('[data-testid="box-status"]').should('contain', 'Out of viewport')
+    cy.get('[data-testid="viewport"]').scrollTo(0, 200)
+    cy.get('[data-testid="box-status"]').should('contain', 'In viewport')
+    cy.get('[data-testid="toggle-viewport-hidden"]').click()
+    cy.get('[data-testid="toggle-viewport-hidden"]').should('contain', 'Show viewport')
+    cy.get('[data-testid="box-status"]').should('contain', 'Out of viewport')
+  })
 })
