@@ -67,7 +67,7 @@
   "source": "src/index.ts",
   "main": "built/index.umd.js",
   "module": "built/index.esm.js",
-  "types": "built/src/index.d.ts",
+  "types": "built/index.d.ts",
   "sideEffects": false,
   "keywords": [
     "react",
