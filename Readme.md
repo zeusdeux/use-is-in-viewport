@@ -53,7 +53,7 @@ serve as a north star for this hook.
    - Simple, to the point name
    - Easy installation
    - Correct peer dependencies to prevent foot-guns
-   - Tons of docs and examples (in progress)
+   - Tons of docs and examples
 3. Make it easy to address the most likely use-cases
    - e.g., "Tell me when an element is visible in the current window viewport", "Tell me when 75% of
      an element is visible in current window viewport"
@@ -66,7 +66,7 @@ serve as a north star for this hook.
 6. Only solve the actual problem
    - e.g., providing a polyfill for Intersection Observer is not this package's job
 7. Be trustworthy
-   - All use cases have corresponding integration tests using Cypress (in progress)
+   - All use cases have corresponding integration tests using Cypress
 
 > With all
 > [all major browsers having added support for Intersection Observer API](https://caniuse.com/#search=intersection%20observer),
@@ -143,7 +143,7 @@ reported as visible in viewport.
 // at least 50% of the target intersects with the viewport
 const [isInViewport, targetRef] = useIsInViewport({ threshold: 50 })
 ...
-<div ref={wrappedTargetRef}>{ isInViewport ? 'Visible' : 'Nope' }</div>
+<div ref={targetRef}>{ isInViewport ? 'Visible' : 'Nope' }</div>
 ```
 
 #### _options.target_
@@ -163,6 +163,8 @@ what you must pass to the `ref` property of the element you want to track the vi
 const targetRef = useCallback(node => console.log(node)) // can come from anywhere
 // or
 const targetRef = useRef(null) // can come from anywhere
+// or
+const targetRef = React.createRef(null) // can come from anywhere 
 
 const [isInViewport, wrappedTargetRef] = useIsInViewport({ target: targetRef })
 ...
