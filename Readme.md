@@ -110,7 +110,7 @@ It returns an `array` that contains the following in order:
    provided viewport
    - `null` -> first call to the hook when nothing is initialized
    - `true` -> target element is visible in the given viewport
-   - `false` -> target element is visible in the given viewport
+   - `false` -> target element is not visible in the given viewport
 2. A [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs) to pass to the
    element you want to know the visibility of.
 3. A [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs) to pass to the
