@@ -395,20 +395,27 @@ export default function MyElement() {
 
 ```js
 import { useState } from 'react'
-import useIsInViewport from 'use-is-in-viewport'
+import useIsInViewport, { HookOptions } from 'use-is-in-viewport'
 
-export function useClampedIsInViewport(options) {
+export function function useClampedIsInViewport(
+  options?: HookOptions
+): ReturnType<typeof useIsInViewport> {
   const [isInViewport, ...etc] = useIsInViewport(options)
-  const [wasInViewportAtleastOnce, setWasInViewportAtleastOnce] = useState(isInViewport)
-  
-  setWasInViewportAtleastOnce(prev => {
-    // this will clamp it to the first true
-    // received from useIsInViewport
-    if (!prev) {
-      return isInViewport
-    }
-    return prev
-  })
+  const [
+    wasInViewportAtleastOnce,
+    setWasInViewportAtleastOnce
+  ] = React.useState(isInViewport)
+
+  React.useEffect(() => {
+    setWasInViewportAtleastOnce((prev) => {
+      // this will clamp it to the first true
+      // received from useIsInViewport
+      if (!prev) {
+        return isInViewport
+      }
+      return prev
+    })
+  }, [isInViewport])
 
   return [wasInViewportAtleastOnce, ...etc]
 }
