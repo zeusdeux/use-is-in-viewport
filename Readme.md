@@ -393,18 +393,13 @@ export default function MyElement() {
 
 ### Example 6: Composing with useState to create a custom hook that clamps to `true` once the target element is in viewport
 
-```js
+```ts
 import { useState } from 'react'
 import useIsInViewport, { HookOptions } from 'use-is-in-viewport'
 
-export function function useClampedIsInViewport(
-  options?: HookOptions
-): ReturnType<typeof useIsInViewport> {
+export function useClampedIsInViewport(options?: HookOptions): ReturnType<typeof useIsInViewport> {
   const [isInViewport, ...etc] = useIsInViewport(options)
-  const [
-    wasInViewportAtleastOnce,
-    setWasInViewportAtleastOnce
-  ] = React.useState(isInViewport)
+  const [wasInViewportAtleastOnce, setWasInViewportAtleastOnce] = useState(isInViewport)
 
   React.useEffect(() => {
     setWasInViewportAtleastOnce((prev) => {
@@ -419,4 +414,5 @@ export function function useClampedIsInViewport(
 
   return [wasInViewportAtleastOnce, ...etc]
 }
+
 ```
