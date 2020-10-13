@@ -19,7 +19,14 @@ viewport.
     - [options.target](#optionstarget)
     - [options.viewport](#optionsviewport)
     - [options.{modTop, modRight, modBottom, modLeft}](#optionsmodtop-modright-modbottom-modleft)
-- [Example usage](#example-usage)
+- [Examples](#example-usage)
+  - [CRA based example app](examples/cra)
+  - [Element with its parent document as viewport](#example-1-element-with-its-parent-document-as-viewport)
+  - [Element with a custom viewport](#example-2-element-with-a-custom-viewport)
+  - [Using a forwarded ref for the target element](#example-3-using-a-forwarded-ref-for-the-target-element)
+  - [Using a forwarded ref for the viewport element](#example-4-using-a-forwarded-ref-for-the-viewport-element)
+  - [Tracking visibility in a custom viewport of multiple elements](#example-5-tracking-visibility-in-a-custom-viewport-of-multiple-elements)
+  - [Composing with useState to create a custom hook that clamps to true once the target element is in viewport](#example-6-composing-with-usestate-to-create-a-custom-hook-that-clamps-to-true-once-the-target-element-is-in-viewport)
 
 ## Motivation
 
@@ -249,7 +256,7 @@ const [isInViewport, targetRef] = useIsInViewport({
 ...
 ```
 
-## Example usage
+## Examples
 
 A CRA based example app (which is also used in the test suite) can be found under
 [examples/cra](examples/cra). Inline examples showcasing some of the use-cases are below.
