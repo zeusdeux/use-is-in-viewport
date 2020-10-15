@@ -402,9 +402,9 @@ export default function MyElement() {
 
 ```ts
 import { useEffect, useState } from 'react'
-import useIsInViewport, { HookOptions } from 'use-is-in-viewport'
+import useIsInViewport from 'use-is-in-viewport'
 
-export function useClampedIsInViewport(options?: HookOptions): ReturnType<typeof useIsInViewport> {
+export function useClampedIsInViewport(options) {
   const [isInViewport, ...etc] = useIsInViewport(options)
   const [wasInViewportAtleastOnce, setWasInViewportAtleastOnce] = useState(isInViewport)
 
