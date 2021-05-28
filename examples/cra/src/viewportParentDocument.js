@@ -14,7 +14,7 @@ export function SimpleElement() {
         onClick={() => toggleHide(h => !h)}
         data-testid="toggle-box-position"
       >
-        {hidden ? 'Show box' : 'Hide box'}
+        {hidden ? 'Show box (or scroll to show it)' : 'Hide box'}
       </button>
       <div
         className={cx(box, {
@@ -57,7 +57,7 @@ export const RefForwardingElement = React.forwardRef(function RefForwardingEleme
         onClick={() => toggleHide(h => !h)}
         data-testid="toggle-box-position"
       >
-        {hidden ? 'Show box' : 'Hide box'}
+        {hidden ? 'Show box (or scroll to show it)' : 'Hide box'}
       </button>
       <div
         className={cx('target-div', box, {
