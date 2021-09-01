@@ -6,6 +6,7 @@
     "bundle": "microbundle -f es,umd --tsconfig ./tsconfig.json",
     "build": "npm run clean && npm run typecheck && npm run lint && npm run bundle",
     "prepack": "npm run build",
+    "prepare": "npm run build",
     "watch": "microbundle watch",
     "cra:build": "npm run build && npm link && cd examples/cra/ && pwd && npm run build",
     "cra:start": "cd examples/cra/ && pwd && npm run start-for-cypress",
@@ -17,7 +18,7 @@
     "publish-package": "np"
   },
   "devDependencies": {
-    "@types/react": "^16.9.23",
+    "@types/react": "^17.0.19",
     "cypress": "^3.7.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
@@ -68,6 +69,9 @@
   "main": "built/index.umd.js",
   "module": "built/index.esm.js",
   "types": "built/index.d.ts",
+  "files": [
+    "built"
+  ],
   "sideEffects": false,
   "keywords": [
     "react",
