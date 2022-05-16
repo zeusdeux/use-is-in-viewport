@@ -34,7 +34,7 @@
     "observe-element-in-viewport": "0.0.15"
   },
   "peerDependencies": {
-    "react": "^16.8.6"
+    "react": ">=16.8.6"
   },
   "engines": {
     "node": ">=10"
