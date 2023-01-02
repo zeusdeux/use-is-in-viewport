@@ -21,7 +21,7 @@
     "cypress": "^3.7.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "microbundle": "^0.11.0",
+    "microbundle": "^0.15.1",
     "np": "^6.2.0",
     "prettier": "1.19.1",
     "rimraf": "^3.0.2",
